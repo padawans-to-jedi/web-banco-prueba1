@@ -1,0 +1,11 @@
+
+.recommenders/index/http___download_eclipse_org_recommenders_models_photon_/_0.nrm
+*.cfs
+*.fdt
+*.fdx
+*.frq
+*.prx
+.metadata/.lock
+.metadata/.plugins/org.eclipse.jdt.core/index.db
+*.tis
+*.lock
