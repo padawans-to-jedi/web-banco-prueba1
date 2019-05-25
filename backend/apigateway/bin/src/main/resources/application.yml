@@ -1,0 +1,25 @@
+#Server 
+server:
+  port: 8080
+#Constanst
+database: liberbank-database
+host: localhost:3306  
+
+#JPA
+spring:
+  jpa: 
+    generate-ddl: true
+    show-sql: false
+    properties: 
+      hibernate: 
+        format_sql : true 
+  datasource: 
+    url: jdbc:mysql://${host}/${database}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT
+    username: root
+    password: root  
+    
+# App Properties
+grokonez:
+  app: 
+    jwtSecret: jwtGrokonezSecretKey
+    jwtExpiration: 86400
