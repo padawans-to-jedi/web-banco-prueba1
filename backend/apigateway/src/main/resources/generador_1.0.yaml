@@ -15,7 +15,7 @@ securityDefinitions:
         scopes:
           aplication: Total access 
 paths:
-  /users/authorizations:
+  /login:
     post:
       summary: Login de usuario.
       description: Obtener la autorizacion para el usuario.
@@ -34,7 +34,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/LoginResponse'
-  /users:
+  /registry:
     post:
       summary: Registrar un nuevo usuario.
       description: Registrar un nuevo usuario.
