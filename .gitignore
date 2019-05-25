@@ -9,3 +9,5 @@
 .metadata/.plugins/org.eclipse.jdt.core/index.db
 *.tis
 *.lock
+/.metadata/
+/.recommenders/
