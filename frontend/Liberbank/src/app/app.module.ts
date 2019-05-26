@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 // import { APPROUTINGPROVIDERS, ROUTING } from './app.route';
-
+import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './component/home/home.component';
 
@@ -12,6 +12,7 @@ import { HomeComponent } from './component/home/home.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule
 
   ],
   providers: [],

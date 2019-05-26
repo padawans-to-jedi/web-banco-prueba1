@@ -7,11 +7,11 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <button class="btn btn-warning" type="submit" data-toggle="modal" data-target="#exampleModal">Acceso Clientes</button>
+                <button class="btn btn-warning" data-toggle="modal" data-target="#modalAcceso">Acceso Clientes</button>
                 <!-- <a class="nav-link" [routerLink]="['/home']">Login <span class="sr-only">(current)</span></a> -->
             </li>
             <li class="segundo ">
-                <button class="btn btn-outline-warning segundo">Hazte Cliente</button>
+                <button class="btn btn-outline-warning segundo" data-toggle="modal" data-target="#modalRegistro">Hazte Cliente</button>
             </li>
         </ul>
     </div>
@@ -26,23 +26,119 @@
     </div>
 </div>
 
+
+
+<!-- MODAL ACCESO -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAcceso">
+    Launch demo modal
+  </button>
+
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalAcceso" tabindex="-1" role="dialog" aria-labelledby="modalAcceso" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAcceso">Acceso a Clientes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label col-form-label-sm">Nombre de usuario</label>
+                        <input type="text" class="form-control form-control-sm" id="name" aria-describedby="name" placeholder="Introduce tu nombre de usuario">
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 col-form-label col-form-label-sm">Contraseña</label>
+                        <input type="password" class="form-control form-control-sm" id="parentSelectorScope" placeholder="Introduce tu contraseña">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Acceder</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                <button type="button" class="btn btn-primary">Acceder</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- MODAL REGISTRO -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistro">
+        Launch demo modal
+      </button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="modalRegistro" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="modalRegistro">Registro</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                ...
+                <form #registerForm="ngForm" (ngSubmit)="resgistrar()">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
+                        <input type="text" class="form-control form-control-sm" name="name" #name="ngModel" [(ngModel)]="user.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="surname" class="col-sm-2 col-form-label col-form-label-sm">Apellidos</label>
+                        <input type="text" class="form-control form-control-sm" name="surname" #surname="ngModel" [(ngModel)]="user.surname">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 col-form-label col-form-label-sm">Teléfono</label>
+                        <input type="number" class="form-control form-control-sm" name="phone" #phone="ngModel" [(ngModel)]="user.phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-form-label col-form-label-sm">Correo electrónico</label>
+                        <input type="email" class="form-control form-control-sm" name="email" #email="ngModel" [(ngModel)]="user.email">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country" class="col-sm-2 col-form-label col-form-label-sm">Ciudad</label>
+                            <input type="text" class="form-control form-control-sm" name="country" #country="ngModel" [(ngModel)]="user.country">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="street" class="col-sm-2 col-form-label col-form-label-sm">Calle</label>
+                            <input type="text" class="form-control form-control-sm" name="street" #street="ngModel" [(ngModel)]="user.street">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="number" class="col-sm-2 col-form-label col-form-label-sm">Número</label>
+                            <input type="text" class="form-control form-control-sm" name="number" #number="ngModel" [(ngModel)]="user.number">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="floor" class="col-sm-2 col-form-label col-form-label-sm">Planta</label>
+                            <input type="text" class="form-control form-control-sm" name="floor" #floor="ngModel" [(ngModel)]="user.floor">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="postalCode" class="col-sm-2 col-form-label col-form-label-sm">CP</label>
+                            <input type="text" class="form-control form-control-sm" name="postalCode" #postalCode="ngModel" [(ngModel)]="user.postalCode">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 col-form-label col-form-label-sm">Contraseña</label>
+                        <input type="password" class="form-control form-control-sm" name="password" #password="ngModel" [(ngModel)]="user.password">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordRepeat" class="col-form-label col-form-label-sm">Repetir contraseña</label>
+                        <input type="password" name="passwordRepeat" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <input type="submit" value="Registrar">
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+
         </div>
     </div>
 </div>
