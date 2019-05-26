@@ -19,7 +19,6 @@ spring:
     password: root  
     
 # App Properties
-grokonez:
-  app: 
-    jwtSecret: jwtGrokonezSecretKey
+app: 
+    jwtSecret: padawansSecretKey
     jwtExpiration: 86400

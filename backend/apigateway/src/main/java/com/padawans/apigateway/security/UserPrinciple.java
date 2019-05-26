@@ -1,4 +1,4 @@
-package com.padawans.apigateway.service;
+package com.padawans.apigateway.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.padawans.apigateway.dao.UserDAO;

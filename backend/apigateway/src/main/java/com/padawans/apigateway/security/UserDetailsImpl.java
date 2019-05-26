@@ -1,4 +1,4 @@
-package com.padawans.apigateway.service;
+package com.padawans.apigateway.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +11,7 @@ import com.padawans.apigateway.dao.UserDAO;
 import com.padawans.apigateway.repository.UserRpository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsImpl implements UserDetailsService {
 
     @Autowired
     UserRpository userRepository;

@@ -10,11 +10,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.padawans.apigateway.service.UserDetailsServiceImpl;
+import com.padawans.apigateway.security.jwt.JwtAuthEntryPoint;
+import com.padawans.apigateway.security.jwt.JwtAuthTokenFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -33,17 +35,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            "/login",
 	            "/webjars/**"
 	    };
+	private static final String[] AUTH_BLACKLIST = {
+			"/api/auth/**"
+            
+    };
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
-//
-//    @Autowired
-//    private JwtAuthEntryPoint unauthorizedHandler;
-//
-//    @Bean
-//    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
-//        return new JwtAuthTokenFilter();
-//    }
-//
+    UserDetailsImpl userDetailsService;
+
+    @Autowired
+    private JwtAuthEntryPoint unauthorizedHandler;
+
+    @Bean
+    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
+        return new JwtAuthTokenFilter();
+    }
+
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
@@ -67,14 +73,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().
                 authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).anonymous()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers(AUTH_BLACKLIST).permitAll()
                 .anyRequest().authenticated()
-                ;
-//                .and()
-//                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         
-//        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
     @Override
     public void configure(WebSecurity web) throws Exception {

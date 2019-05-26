@@ -2,8 +2,11 @@ package com.padawans.apigateway.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,7 +18,8 @@ public class AddressDAO {
 	@GeneratedValue
 	private Long id;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
 	private UserDAO user;
 
 	@Column
@@ -37,6 +41,28 @@ public class AddressDAO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	public AddressDAO(String street, String country, String number, String floor, String postalCode) {
+		super();
+		this.street = street;
+		this.country = country;
+		this.number = number;
+		this.floor = floor;
+		this.postalCode = postalCode;
+	}
+
+
+	public AddressDAO(UserDAO user, String street, String country, String number, String floor, String postalCode) {
+		super();
+		this.user = user;
+		this.street = street;
+		this.country = country;
+		this.number = number;
+		this.floor = floor;
+		this.postalCode = postalCode;
+	}
+
 
 	public AddressDAO(Long id, UserDAO user, String street, String country, String number, String floor,
 			String postalCode) {

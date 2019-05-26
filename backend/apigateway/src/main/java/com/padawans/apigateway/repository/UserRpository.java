@@ -11,5 +11,6 @@ import com.padawans.apigateway.dao.UserDAO;
 public interface UserRpository extends JpaRepository<UserDAO, Long> {
 
 	Optional<UserDAO> findByUserName(String username);
-
+	Boolean existsByUserName(String username);
+ 
 }

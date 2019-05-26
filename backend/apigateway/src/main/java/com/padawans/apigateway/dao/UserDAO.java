@@ -1,7 +1,9 @@
 package com.padawans.apigateway.dao;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -28,7 +30,9 @@ public class UserDAO {
 	@Column(unique = true)
 	private String userName;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "user")
 	private AddressDAO address;
 	@Column
 	private String password;
@@ -40,6 +44,22 @@ public class UserDAO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	
+	public UserDAO(String name, String surname, String phone, String userName, AddressDAO address, String password,
+			Set<ProductsDAO> posts) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.phone = phone;
+		this.userName = userName;
+		this.address = address;
+		this.password = password;
+		this.posts = posts;
+	}
+
+
 
 	public UserDAO(Long id, String name, String surname, String phone, String userName, AddressDAO address,
 			String password, Set<ProductsDAO> posts) {
