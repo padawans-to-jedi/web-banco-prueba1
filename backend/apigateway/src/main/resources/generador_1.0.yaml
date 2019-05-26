@@ -51,12 +51,28 @@ paths:
       responses:
         201:
           description: CREATED
+          schema:
+            $ref: '#/definitions/MessageResponse'
     
     
     
 
 
 definitions:
+  
+  MessageResponse:
+    type: object
+    properties:
+      timestamp:
+        type: string
+      httpStatus:
+        type: integer
+      reasonPhrase:
+        type: string
+      message:
+        type: string
+      
+  
   UserData:
     type: object
     properties:
