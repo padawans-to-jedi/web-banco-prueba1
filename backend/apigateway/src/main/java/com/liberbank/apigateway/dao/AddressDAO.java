@@ -1,4 +1,4 @@
-package com.liberbank.login_registry.dao;
+package com.liberbank.apigateway.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

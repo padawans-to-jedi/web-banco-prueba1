@@ -1,7 +1,7 @@
-package com.liberbank.login_registry.security;
+package com.liberbank.apigateway.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.liberbank.login_registry.dao.UserDAO;
+import com.liberbank.apigateway.dao.UserDAO;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

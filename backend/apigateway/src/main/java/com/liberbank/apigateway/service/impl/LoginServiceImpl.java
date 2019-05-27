@@ -1,4 +1,4 @@
-package com.liberbank.login_registry.service.impl;
+package com.liberbank.apigateway.service.impl;
 
 import java.util.Optional;
 
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.generated.model.LoginRequest;
 import com.example.generated.model.LoginResponse;
-import com.liberbank.login_registry.dao.UserDAO;
-import com.liberbank.login_registry.exceptions.UserRepositoryException;
-import com.liberbank.login_registry.repository.UserRpository;
-import com.liberbank.login_registry.security.jwt.JwtProvider;
-import com.liberbank.login_registry.service.LoginService;
-import com.liberbank.login_registry.utils.DataUtils;
+import com.liberbank.apigateway.dao.UserDAO;
+import com.liberbank.apigateway.exceptions.UserRepositoryException;
+import com.liberbank.apigateway.repository.UserRpository;
+import com.liberbank.apigateway.security.jwt.JwtProvider;
+import com.liberbank.apigateway.service.LoginService;
+import com.liberbank.apigateway.utils.DataUtils;
 
 
 

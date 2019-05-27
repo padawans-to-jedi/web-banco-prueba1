@@ -1,9 +1,9 @@
-package com.liberbank.login_registry.utils;
+package com.liberbank.apigateway.utils;
 
 import com.example.generated.model.Address;
 import com.example.generated.model.LoginResponse;
-import com.liberbank.login_registry.dao.AddressDAO;
-import com.liberbank.login_registry.dao.UserDAO;
+import com.liberbank.apigateway.dao.AddressDAO;
+import com.liberbank.apigateway.dao.UserDAO;
 
 public class DataUtils {
 	

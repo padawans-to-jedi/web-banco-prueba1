@@ -1,4 +1,4 @@
-package com.liberbank.login_registry.exceptions;
+package com.liberbank.apigateway.exceptions;
 
 public class UserRepositoryException extends RuntimeException{
 

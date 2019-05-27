@@ -1,4 +1,4 @@
-package com.liberbank.login_registry.security;
+package com.liberbank.apigateway.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.liberbank.login_registry.security.jwt.JwtAuthEntryPoint;
-import com.liberbank.login_registry.security.jwt.JwtAuthTokenFilter;
+import com.liberbank.apigateway.security.jwt.JwtAuthEntryPoint;
+import com.liberbank.apigateway.security.jwt.JwtAuthTokenFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -26,7 +26,6 @@ import com.liberbank.login_registry.security.jwt.JwtAuthTokenFilter;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String[] AUTH_WHITELIST = {
 
-	            // -- swagger ui
 	            "/swagger-resources/**",
 	            "/swagger-ui.html",
 	            "/swagger-ui.html/**",
@@ -35,10 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            "/login",
 	            "/webjars/**"
 	    };
-	private static final String[] AUTH_BLACKLIST = {
-			"/api/auth/**"
-            
-    };
     @Autowired
     UserDetailsImpl userDetailsService;
 
@@ -74,17 +69,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().anonymous()
-                .antMatchers(AUTH_BLACKLIST).permitAll()
-                .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-    	
-        web.ignoring().antMatchers(AUTH_WHITELIST);
-    }
+
 }
