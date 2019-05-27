@@ -56,6 +56,7 @@ public class RegistryServiceImpl implements RegistryService {
 		} catch (Exception e) {
 			throw new UserRepositoryException("El ususario no ha podido registrarse. Debido a : "+e.getMessage());
 		}
+		
 		MessageResponse message = new MessageResponse();
 		LOG.info("REGISTRO USUARIO COMPLETADO  PARA EL USUARIO-> " + user.getUserName());
 		message.setHttpStatus(201);
