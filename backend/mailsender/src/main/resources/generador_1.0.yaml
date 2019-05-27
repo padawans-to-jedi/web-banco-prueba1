@@ -1,0 +1,44 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'LiberBank-MailSender'
+  description: 'LiberBank-MailSender'
+
+paths:
+  /mails:
+    post:
+      tags: 
+        - Publico
+      summary: Login de usuario.
+      description: Obtener la autorizacion para el usuario.
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      parameters:
+        - name: LoginRequest
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MailRequest'
+      responses:
+        200:
+          description: OK
+          
+            
+definitions:
+  MailRequest:
+    type: object
+    properties:
+      to:
+        type: string
+      subject:
+        type: string
+      body:
+        type: string
+        
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /pedrodlf/LiberBank-MailSender/1.0
+schemes:
+ - https

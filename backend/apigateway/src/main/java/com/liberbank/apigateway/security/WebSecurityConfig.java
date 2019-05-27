@@ -34,6 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            "/login",
 	            "/webjars/**"
 	    };
+	private static final String[] AUTH_BLACKLIST = {
+
+            
+    };
     @Autowired
     UserDetailsImpl userDetailsService;
 
@@ -69,6 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().anonymous()
+                .antMatchers(AUTH_BLACKLIST).permitAll().anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

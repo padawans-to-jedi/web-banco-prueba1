@@ -1,9 +1,8 @@
 swagger: '2.0'
 info:
-  version: '1.0.0'
-  title: Sample Implicit Flow OAuth2 Project
-  description: This is an example of using OAuth2 Implicit Flow in a specification to describe security to your API.
-
+  version: '1.0'
+  title: 'LiberBank-ApiGateway'
+  description: 'LiberBank-ApiGateway definition'
 security:
   - OAuth2: [] 
 securityDefinitions:
@@ -13,10 +12,12 @@ securityDefinitions:
         authorizationUrl: https://example.com/oauth/authorize
         tokenUrl: https://example.com/oauth/token
         scopes:
-          aplication: Total access 
+          private: Total access 
 paths:
   /login:
     post:
+      tags: 
+        - Publico
       summary: Login de usuario.
       description: Obtener la autorizacion para el usuario.
       produces: 
@@ -36,6 +37,8 @@ paths:
             $ref: '#/definitions/LoginResponse'
   /registry:
     post:
+      tags: 
+        - Publico
       summary: Registrar un nuevo usuario.
       description: Registrar un nuevo usuario.
       produces: 
@@ -54,7 +57,27 @@ paths:
           schema:
             $ref: '#/definitions/MessageResponse'
     
-    
+  /users/{userID}/products:
+    post:
+      tags: 
+        - Privado
+      security:
+        - OAuth2: [private]    
+      summary: Agregar un producto al usuario.
+      description: Agregar un producto al usuario.
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      parameters: 
+        - name: userID
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+      responses:
+        200:
+          description: OK    
     
 
 
@@ -78,12 +101,19 @@ definitions:
     properties:
       name:
         type: string
+        minLength: 3
       surname:
         type: string
+        minLength: 3
       phone:
         type: string
+        minLength: 9
+        maxLength: 15
       email:
         type: string
+        pattern: "^[a-zA-Z0-9-@.]+$"
+        minLength: 6
+        maxLength: 30
       address:
         $ref: '#/definitions/Address'
       password:
@@ -100,6 +130,9 @@ definitions:
       userName:
         description: email del usuario.
         type: string
+        pattern: "^[a-zA-Z0-9-@.]+$"
+        minLength: 6
+        maxLength: 30
       password:
         description: el password debe estar codificado haciendo uso de un sha256.
         type: string
@@ -116,18 +149,20 @@ definitions:
         maximum: 10000
       name:
         type: string
+        minLength: 3
       surname:
         type: string
+        minLength: 3
       phone:
         type: string
+        minLength: 3
       email:
         type: string
+        pattern: "^[a-zA-Z0-9-@.]+$"
+        minLength: 6
+        maxLength: 30
       address:
         $ref: '#/definitions/Address'
-      products:
-        type: array
-        items:
-          $ref: '#/definitions/Product'
       bearer:
         type: string
   Address:
@@ -135,14 +170,19 @@ definitions:
     properties:
       street:
         type: string
+        minLength: 3
       country:
         type: string
+        minLength: 3
       number:
         type: string
+        minLength: 1
       floor:
         type: string
+        minLength: 1
       postalCode:
         type: string
+        minLength: 4
   
   Product:
     type: object
@@ -156,9 +196,8 @@ definitions:
     
 
 
-
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
-basePath: /pedrodlf/padawans-liberbank/1.0.0
+basePath: /pedrodlf/LiberBank-ApiGateway/1.0
 schemes:
  - https

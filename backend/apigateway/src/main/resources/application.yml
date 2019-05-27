@@ -1,6 +1,6 @@
 #Server 
 server:
-  port: 8045
+  port: 8080
 #Constanst
 database: liberbank-database
 host: localhost:3306  
