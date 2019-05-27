@@ -85,7 +85,10 @@
               </button>
             </div>
             <div class="modal-body">
-                <form #registerForm="ngForm" (ngSubmit)="resgistrar()">
+                <div class="alert alert-success" *ngIf="status == 'success'">
+                    <span>Registro completado correctamente. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
+                </div>
+                <form #registerForm="ngForm" (ngSubmit)="resgistrar(registerForm)" *ngIf="showForm">
                     <div class="form-group">
                         <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
                         <input type="text" class="form-control form-control-sm" name="name" #name="ngModel" [(ngModel)]="user.name">
@@ -105,23 +108,23 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="country" class="col-sm-2 col-form-label col-form-label-sm">Ciudad</label>
-                            <input type="text" class="form-control form-control-sm" name="country" #country="ngModel" [(ngModel)]="user.country">
+                            <input type="text" class="form-control form-control-sm" name="country" #country="ngModel" [(ngModel)]="user.address.country">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="street" class="col-sm-2 col-form-label col-form-label-sm">Calle</label>
-                            <input type="text" class="form-control form-control-sm" name="street" #street="ngModel" [(ngModel)]="user.street">
+                            <input type="text" class="form-control form-control-sm" name="street" #street="ngModel" [(ngModel)]="user.address.street">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="number" class="col-sm-2 col-form-label col-form-label-sm">Número</label>
-                            <input type="text" class="form-control form-control-sm" name="number" #number="ngModel" [(ngModel)]="user.number">
+                            <input type="text" class="form-control form-control-sm" name="number" #number="ngModel" [(ngModel)]="user.address.number">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="floor" class="col-sm-2 col-form-label col-form-label-sm">Planta</label>
-                            <input type="text" class="form-control form-control-sm" name="floor" #floor="ngModel" [(ngModel)]="user.floor">
+                            <input type="text" class="form-control form-control-sm" name="floor" #floor="ngModel" [(ngModel)]="user.address.floor">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="postalCode" class="col-sm-2 col-form-label col-form-label-sm">CP</label>
-                            <input type="text" class="form-control form-control-sm" name="postalCode" #postalCode="ngModel" [(ngModel)]="user.postalCode">
+                            <input type="text" class="form-control form-control-sm" name="postalCode" #postalCode="ngModel" [(ngModel)]="user.address.postalCode">
                         </div>
                     </div>
                     <div class="form-group">
@@ -134,7 +137,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <input type="submit" value="Registrar">
+                        <input type="submit" class="btn btn-success" value="Registrar">
                     </div>
                 </form>
             </div>

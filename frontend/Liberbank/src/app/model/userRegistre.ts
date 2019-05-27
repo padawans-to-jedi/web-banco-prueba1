@@ -1,5 +1,5 @@
+
 export class UserRegistre {
-    
     constructor(
         public name: string,
         public surname: string,
