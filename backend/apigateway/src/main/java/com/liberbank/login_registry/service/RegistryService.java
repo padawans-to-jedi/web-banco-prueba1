@@ -1,4 +1,4 @@
-package com.liberbank.apigateway.service;
+package com.liberbank.login_registry.service;
 
 import org.springframework.http.ResponseEntity;
 

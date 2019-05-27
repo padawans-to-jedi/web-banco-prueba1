@@ -1,4 +1,4 @@
-package com.liberbank.apigateway;
+package com.liberbank.login_registry;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

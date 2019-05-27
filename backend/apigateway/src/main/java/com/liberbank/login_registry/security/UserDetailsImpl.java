@@ -1,4 +1,4 @@
-package com.liberbank.apigateway.security;
+package com.liberbank.login_registry.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.liberbank.apigateway.dao.UserDAO;
-import com.liberbank.apigateway.repository.UserRpository;
+import com.liberbank.login_registry.dao.UserDAO;
+import com.liberbank.login_registry.repository.UserRpository;
 
 @Service
 public class UserDetailsImpl implements UserDetailsService {

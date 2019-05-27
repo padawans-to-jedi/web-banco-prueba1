@@ -1,4 +1,4 @@
-package com.liberbank.apigateway.controller;
+package com.liberbank.login_registry.controller;
 
 import javax.validation.Valid;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.generated.api.RegistryApi;
 import com.example.generated.model.MessageResponse;
 import com.example.generated.model.UserData;
-import com.liberbank.apigateway.service.RegistryService;
+import com.liberbank.login_registry.service.RegistryService;
 
 @Controller
 @CrossOrigin(origins = "*", methods= {RequestMethod.POST})

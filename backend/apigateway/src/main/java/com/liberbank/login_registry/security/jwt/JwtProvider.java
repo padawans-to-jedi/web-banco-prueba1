@@ -1,4 +1,4 @@
-package com.liberbank.apigateway.security.jwt;
+package com.liberbank.login_registry.security.jwt;
 
 
 import java.util.Date;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.liberbank.apigateway.security.UserPrinciple;
+import com.liberbank.login_registry.security.UserPrinciple;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

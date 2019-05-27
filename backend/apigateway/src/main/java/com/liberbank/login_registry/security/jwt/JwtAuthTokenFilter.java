@@ -1,4 +1,4 @@
-package com.liberbank.apigateway.security.jwt;
+package com.liberbank.login_registry.security.jwt;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.liberbank.apigateway.security.UserDetailsImpl;
+import com.liberbank.login_registry.security.UserDetailsImpl;
 
 public class JwtAuthTokenFilter extends OncePerRequestFilter {
 

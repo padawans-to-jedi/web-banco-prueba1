@@ -1,4 +1,4 @@
-package com.liberbank.apigateway.security;
+package com.liberbank.login_registry.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.liberbank.apigateway.security.jwt.JwtAuthEntryPoint;
-import com.liberbank.apigateway.security.jwt.JwtAuthTokenFilter;
+import com.liberbank.login_registry.security.jwt.JwtAuthEntryPoint;
+import com.liberbank.login_registry.security.jwt.JwtAuthTokenFilter;
 
 @Configuration
 @EnableWebSecurity
