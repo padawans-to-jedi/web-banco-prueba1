@@ -24,6 +24,7 @@ public class MailServiceImpl implements MailsService {
 	        message.setTo(to); 
 	        message.setSubject(subject); 
 	        message.setText(text);
+	      
 	        emailSender.send(message);
 		} catch (Exception e) {
 			throw new MailSeerviceException("EL email no se ha enviado. Causa: "+e);
