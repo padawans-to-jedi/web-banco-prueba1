@@ -1,3 +1,10 @@
+<!-- <li>
+        <h2><a [routerLink]="['/Home']">Tour of Heroes</a></h2>
+    </li>
+    <li>
+        <h2><a [routerLink]="['/Vestidos']">Tour of Heroes</a></h2>
+    </li> -->
+
 <!-- Barra de Navegación -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light ">
     <a class="navbar-brand" href="#">
@@ -12,6 +19,9 @@
             </li>
             <li class="segundo ">
                 <button class="btn btn-outline-warning segundo" data-toggle="modal" data-target="#modalRegistro">Hazte Cliente</button>
+            </li>
+            <li>
+                <a class="nav-link" routerLink="interface" routerLinkActive="active">interface <span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
@@ -145,3 +155,5 @@
         </div>
     </div>
 </div>
+
+<router-outlet></router-outlet>

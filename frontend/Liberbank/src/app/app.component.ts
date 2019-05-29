@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserRegistre, Address } from './model/userRegistre';
 import { UserRegistreService } from './service/userRegister.service';
-import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 
 @Component({
@@ -17,7 +17,9 @@ export class AppComponent implements OnInit{
   public showForm: boolean;
 
   constructor(
-    private _userRegisterService: UserRegistreService
+    private _userRegisterService: UserRegistreService,
+    private _route: ActivatedRoute,
+    private _router: Router
   ) {
     this.user = new UserRegistre("","","","",new Address("","","","","") ,"")
     this.showForm = true;
@@ -34,6 +36,8 @@ export class AppComponent implements OnInit{
           console.log("Registro completado")
           this.status = 'success'
           this.showForm = false;
+          this._router.navigate(['/interface'])
+
         } else {
           this.status = 'error'
         }

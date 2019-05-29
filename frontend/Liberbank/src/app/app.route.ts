@@ -5,13 +5,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Importar componentes
 
+import { InterfaceComponent } from './component/interface/interface.component';
+import { AppComponent } from './app.component';
+
 // Array de routas
 
-// const APPROUTES: Routes = [
-//     {},
-// ]
+ const appRoutes: Routes = [
+     { path: 'interface', component:  InterfaceComponent},
+     { path: '', component:  AppComponent},
 
-// Exportsr el módulo del router
+ ]
+ //Exportar el módulo del router
 
-// export const APPROUTINGPROVIDERS: any [] = [];
-// export const ROUTING: ModuleWithProviders = RouterModule.forRoot(APPROUTES);
+ export const appRoutingProviders: any [] = [];
+ export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
