@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
 		Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUserName(),
-                        loginRequest.getPassword()
+                        loginRequest.getPassword().toUpperCase()
                 )
         );
 		

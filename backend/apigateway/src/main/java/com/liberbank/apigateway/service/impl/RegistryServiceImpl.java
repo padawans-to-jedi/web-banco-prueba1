@@ -45,7 +45,7 @@ public class RegistryServiceImpl implements RegistryService {
 		}
 
 		UserDAO user = new UserDAO(userdata.getName(), userdata.getSurname(), userdata.getPhone(), userdata.getEmail(),
-				null, encoder.encode(userdata.getPassword()),null);
+				null, encoder.encode(userdata.getPassword().toUpperCase()),null);
 		AddressDAO address = DataUtils.getAdressFromRequest(userdata.getAddress());
 		
 		
