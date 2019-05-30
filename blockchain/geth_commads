@@ -9,3 +9,4 @@ sc address
 
 solc liberbank.sol --bin --abi --optimize -o ./
 
+web3j solidity --abiFile=DemoBank.abi -b=DemoBank.bin -p es.atsistemas.alastria -o ./
