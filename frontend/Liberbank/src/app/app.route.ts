@@ -5,14 +5,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Importar componentes
 
-import { InterfaceComponent } from './component/interface/interface.component';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './component/login/login.component';
+import { PerfilComponent } from './component/perfil/perfil.component';
 
 // Array de routas
 
  const appRoutes: Routes = [
-     { path: 'interface', component:  InterfaceComponent},
-     { path: '', component:  AppComponent},
+
+     { path: '', component:  LoginComponent},
+     { path: 'login', component: LoginComponent },
+     { path: 'perfil', component: PerfilComponent }
+
 
  ]
  //Exportar el módulo del router

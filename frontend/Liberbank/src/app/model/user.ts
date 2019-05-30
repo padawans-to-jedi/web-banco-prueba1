@@ -13,10 +13,10 @@ export class User {
             floor: string,
             postalCode: string,
         },
-        public products: {
+        public products: [{
             productID: string,
             productName: string
-        }
+        }]
     ) {}
 
 

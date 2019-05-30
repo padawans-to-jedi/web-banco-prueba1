@@ -3,25 +3,32 @@ body {
     background-image: url('../assets/img/fondo.jpg');
 }
 
-.navbar-brand img {
-    width: 90px;
-}
-
-.nav-item .btn {
+.navigation {
     padding: 0px !important;
-    font-size: 14px !important;
-    white-space: nowrap;
-    margin-left: 870%;
+    border-radius: 0px !important;
 }
 
-.segundo {
+.navigation .navbar {
+    border-radius: 0px !important;
+}
+
+.navbar-brand img {
+    width: 110px;
+}
+
+.btn-warning {
     padding: 1px !important;
-    font-size: 13px !important;
-    white-space: nowrap;
-    margin-left: 332%;
-    margin-top: 1px;
+    margin-top: 6px !important;
 }
 
+.btn-outline-warning {
+    margin-left: 7px !important;
+    padding: 2px !important;
+    margin-top: 5px !important;
+}
+
+
+/* 
 .contenedor {
     text-align: center;
 }
@@ -32,7 +39,7 @@ body {
     background-repeat: no-repeat;
     top: 57px;
     right: 0px;
-}
+} */
 
 
 /* BOTON SOBRE IMAGEN DE FONDO */
@@ -44,4 +51,4 @@ body {
             left: 50%;
             border-radius: 15px;
             transform: translate(-50%, -50%);
-        } */
+} */

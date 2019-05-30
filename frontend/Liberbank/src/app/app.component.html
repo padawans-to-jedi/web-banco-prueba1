@@ -2,33 +2,61 @@
         <h2><a [routerLink]="['/Home']">Tour of Heroes</a></h2>
     </li>
     <li>
-        <h2><a [routerLink]="['/Vestidos']">Tour of Heroes</a></h2>
+        <h2><a >Tour of Heroes</a></h2>
     </li> -->
 
 <!-- Barra de Navegación -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light ">
-    <a class="navbar-brand" href="#">
-        <img src="../assets/img/liberbank-reto.png" width="30" height="30" alt="">
-    </a>
+<div class="navigation col-lg-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse">
 
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <button class="btn btn-warning" data-toggle="modal" data-target="#modalAcceso">Acceso Clientes</button>
-                <!-- <a class="nav-link" [routerLink]="['/home']">Login <span class="sr-only">(current)</span></a> -->
-            </li>
-            <li class="segundo ">
-                <button class="btn btn-outline-warning segundo" data-toggle="modal" data-target="#modalRegistro">Hazte Cliente</button>
-            </li>
-            <li>
-                <a class="nav-link" routerLink="interface" routerLinkActive="active">interface <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </div>
-</nav>
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">
+                    <img src="../assets/img/liberbank-reto.png" width="30" height="30" alt="">
+                </a>
+            </div>
+
+            <ul class="navbar-nav navbar-right" *ngIf="!identity">
+                <li>
+                    <a [routerLink]="['/login']">
+                        <span class="btn btn-warning" data-toggle="modal" data-target="#modalAcceso"> Acceso Clientes </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="btn btn-outline-warning" data-toggle="modal" data-target="#modalRegistro"> Registrate </span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav navbar-right" *ngIf="identity">
+                <li>
+                    <a href="#">
+                        <span class="btn btn-warning" data-toggle="modal" data-target="#modalAcceso"> cara </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="btn btn-outline-warning" data-toggle="modal" data-target="#modalRegistro"> productos </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="btn btn-outline-warning" (click)="logOut()"> cerrar sesion </span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+</div>
+
 
 <!-- Imagen de fondo -->
-<div class="fondo">
+<div class="fondo" *ngIf="!identity">
     <div class="contenedor">
         <img src="../assets/img/fondo.jpg" class="w-100" />
         <!-- Boton sobre imagen de fondo -->
@@ -37,55 +65,9 @@
 </div>
 
 
-
-<!-- MODAL ACCESO -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAcceso">
-    Launch demo modal
-  </button>
-
-<!-- Modal -->
-<div class="modal fade" id="modalAcceso" tabindex="-1" role="dialog" aria-labelledby="modalAcceso" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAcceso">Acceso a Clientes</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="name" class="col-form-label col-form-label-sm">Nombre de usuario</label>
-                        <input type="text" class="form-control form-control-sm" id="name" aria-describedby="name" placeholder="Introduce tu nombre de usuario">
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="col-sm-2 col-form-label col-form-label-sm">Contraseña</label>
-                        <input type="password" class="form-control form-control-sm" id="parentSelectorScope" placeholder="Introduce tu contraseña">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Acceder</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                <button type="button" class="btn btn-primary">Acceder</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 <!-- MODAL REGISTRO -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistro">
-        Launch demo modal
-      </button>
-
 <!-- Modal -->
-<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="modalRegistro" aria-hidden="true">
+<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="modalRegistro" aria-hidden="true" *ngIf="!identity">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -97,6 +79,9 @@
             <div class="modal-body">
                 <div class="alert alert-success" *ngIf="status == 'success'">
                     <span>Registro completado correctamente. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
+                </div>
+                <div class="alert alert-success" *ngIf="status == 'error'">
+                    <span>Registro no completado, vuelva a intentarlo. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
                 </div>
                 <form #registerForm="ngForm" (ngSubmit)="resgistrar(registerForm)" *ngIf="showForm">
                     <div class="form-group">

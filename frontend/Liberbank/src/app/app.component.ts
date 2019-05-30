@@ -15,6 +15,7 @@ export class AppComponent implements OnInit{
   public user: UserRegistre;
   public status: string;
   public showForm: boolean;
+  public identity;
 
   constructor(
     private _userRegisterService: UserRegistreService,
@@ -26,6 +27,14 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.identity = this._userRegisterService.getUserLogin();
+    console.log(this.identity)
+  }
+
+  logOut() {
+    localStorage.clear();
+    this.identity = null;
+    this._router.navigate['/'];
   }
 
   resgistrar(form) {
@@ -36,10 +45,10 @@ export class AppComponent implements OnInit{
           console.log("Registro completado")
           this.status = 'success'
           this.showForm = false;
-          this._router.navigate(['/interface'])
 
         } else {
           this.status = 'error'
+          this.showForm = false;
         }
       },
       error => {

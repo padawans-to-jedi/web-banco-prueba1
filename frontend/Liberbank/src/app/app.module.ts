@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { InterfaceComponent } from './component/interface/interface.component';
+import { LoginComponent } from './component/login/login.component';
+import { PerfilComponent } from './component/perfil/perfil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InterfaceComponent
+    LoginComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,
