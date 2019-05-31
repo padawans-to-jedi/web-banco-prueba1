@@ -34,11 +34,14 @@ export class AppComponent implements OnInit{
   logOut() {
     localStorage.clear();
     this.identity = null;
-    this._router.navigate['/'];
+    this._router.navigate[''];
   }
+
+
 
   resgistrar(form) {
     console.log(this.user)
+   
     this._userRegisterService.registrado(this.user).subscribe(
       response => {
         if(response) {

@@ -33,8 +33,7 @@ export class LoginComponent implements OnInit {
       response => {
        this.apiUser = response;
        console.log(this.apiUser)
-
-      //  this._router.navigate['/perfil'];
+       
       /* GUARDAMOS LOS DATOS DEL USUARIO EN SESION */
        localStorage.setItem('userLogin', JSON.stringify(this.apiUser));
        console.log('Usuario Logeado')
@@ -44,6 +43,7 @@ export class LoginComponent implements OnInit {
           this.status = 'success'
           /* CERRA VENTANA MODAL Y RECARGAR AL ENVIAR FORMULARIO  */ 
           window.location.reload();
+          
        } else {
          this.status = 'error'
        }

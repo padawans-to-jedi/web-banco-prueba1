@@ -1,10 +1,3 @@
-<!-- <li>
-        <h2><a [routerLink]="['/Home']">Tour of Heroes</a></h2>
-    </li>
-    <li>
-        <h2><a >Tour of Heroes</a></h2>
-    </li> -->
-
 <!-- Barra de Navegación -->
 <div class="navigation col-lg-12">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,9 +9,9 @@
                 </a>
             </div>
 
-            <ul class="navbar-nav navbar-right" *ngIf="!identity">
+            <ul class="navbar-nav" *ngIf="!identity">
                 <li>
-                    <a [routerLink]="['/login']">
+                    <a href="#">
                         <span class="btn btn-warning" data-toggle="modal" data-target="#modalAcceso"> Acceso Clientes </span>
                     </a>
                 </li>
@@ -30,22 +23,35 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav navbar-right" *ngIf="identity">
-                <li>
-                    <a href="#">
-                        <span class="btn btn-warning" data-toggle="modal" data-target="#modalAcceso"> cara </span>
+            <ul class="nav navbar-nav float-right" *ngIf="identity">
+                <li class="dropdown">
+                    <a class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" href="#">
+                        Bienvenido {{identity.name}} {{identity.surname}}
+                        <span class="caret"></span>
                     </a>
-                </li>
+                    <ul class="dropdown-menu">
 
-                <li>
-                    <a href="#">
-                        <span class="btn btn-outline-warning" data-toggle="modal" data-target="#modalRegistro"> productos </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="btn btn-outline-warning" (click)="logOut()"> cerrar sesion </span>
-                    </a>
+                        <li>
+                            <a [routerLink]="['/saldo']">
+                                <span class="dropdown-item"> Consultar saldo </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/transferencias-periodicas']">
+                                <span class="dropdown-item">Tranferencias Periodicas </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/transferencias']">
+                                <span class="dropdown-item"> Tranferencias </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span class="btn btn-outline-warning" (click)="logOut()"> cerrar sesion </span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
 
@@ -54,15 +60,9 @@
 
 </div>
 
-
-<!-- Imagen de fondo -->
-<div class="fondo" *ngIf="!identity">
-    <div class="contenedor">
-        <img src="../assets/img/fondo.jpg" class="w-100" />
-        <!-- Boton sobre imagen de fondo -->
-        <!-- <button type="button" class="btn btn-warning boton">Acceso Clientes</button> -->
-    </div>
 </div>
+</div>
+
 
 
 <!-- MODAL REGISTRO -->
@@ -77,57 +77,60 @@
               </button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-success" *ngIf="status == 'success'">
+                <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
                     <span>Registro completado correctamente. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
                 </div>
-                <div class="alert alert-success" *ngIf="status == 'error'">
+                <div class="alert alert-danger" *ngIf="status == 'error'">
                     <span>Registro no completado, vuelva a intentarlo. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
                 </div>
                 <form #registerForm="ngForm" (ngSubmit)="resgistrar(registerForm)" *ngIf="showForm">
                     <div class="form-group">
                         <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
-                        <input type="text" class="form-control form-control-sm" name="name" #name="ngModel" [(ngModel)]="user.name">
+                        <br>
+                        <input type="text" class="form-control form-control-sm" name="name" #name="ngModel" [(ngModel)]="user.name" minlength="3" required>
+                        <!-- MENSAJE VALIDADOR ERROR -->
+                        <!-- <span *ngIf="name.invalid && name.touched && name.dirty" class="alert-name" role="alert">Introduzca mínimo 3 caracteres.</span> -->
                     </div>
                     <div class="form-group">
                         <label for="surname" class="col-sm-2 col-form-label col-form-label-sm">Apellidos</label>
-                        <input type="text" class="form-control form-control-sm" name="surname" #surname="ngModel" [(ngModel)]="user.surname">
+                        <input type="text" class="form-control form-control-sm" name="surname" #surname="ngModel" [(ngModel)]="user.surname" minlength="3" required>
                     </div>
                     <div class="form-group">
                         <label for="phone" class="col-sm-2 col-form-label col-form-label-sm">Teléfono</label>
-                        <input type="number" class="form-control form-control-sm" name="phone" #phone="ngModel" [(ngModel)]="user.phone">
+                        <input type="number" class="form-control form-control-sm" name="phone" #phone="ngModel" [(ngModel)]="user.phone" minlength="9" maxlength="15" required>
                     </div>
                     <div class="form-group">
                         <label for="email" class="col-form-label col-form-label-sm">Correo electrónico</label>
-                        <input type="email" class="form-control form-control-sm" name="email" #email="ngModel" [(ngModel)]="user.email">
+                        <input type="email" class="form-control form-control-sm" name="email" #email="ngModel" [(ngModel)]="user.email" pattern="^[a-zA-Z0-9-@.]+$" minlength="6" maxlength="30" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="country" class="col-sm-2 col-form-label col-form-label-sm">Ciudad</label>
-                            <input type="text" class="form-control form-control-sm" name="country" #country="ngModel" [(ngModel)]="user.address.country">
+                            <input type="text" class="form-control form-control-sm" name="country" #country="ngModel" [(ngModel)]="user.address.country" minlength="3" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="street" class="col-sm-2 col-form-label col-form-label-sm">Calle</label>
-                            <input type="text" class="form-control form-control-sm" name="street" #street="ngModel" [(ngModel)]="user.address.street">
+                            <input type="text" class="form-control form-control-sm" name="street" #street="ngModel" [(ngModel)]="user.address.street" minlength="3" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="number" class="col-sm-2 col-form-label col-form-label-sm">Número</label>
-                            <input type="text" class="form-control form-control-sm" name="number" #number="ngModel" [(ngModel)]="user.address.number">
+                            <input type="text" class="form-control form-control-sm" name="number" #number="ngModel" [(ngModel)]="user.address.number" minlength="1" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="floor" class="col-sm-2 col-form-label col-form-label-sm">Planta</label>
-                            <input type="text" class="form-control form-control-sm" name="floor" #floor="ngModel" [(ngModel)]="user.address.floor">
+                            <input type="text" class="form-control form-control-sm" name="floor" #floor="ngModel" [(ngModel)]="user.address.floor" minlength="1" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="postalCode" class="col-sm-2 col-form-label col-form-label-sm">CP</label>
-                            <input type="text" class="form-control form-control-sm" name="postalCode" #postalCode="ngModel" [(ngModel)]="user.address.postalCode">
+                            <input type="text" class="form-control form-control-sm" name="postalCode" #postalCode="ngModel" [(ngModel)]="user.address.postalCode" minlength="4" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-sm-2 col-form-label col-form-label-sm">Contraseña</label>
-                        <input type="password" class="form-control form-control-sm" name="password" #password="ngModel" [(ngModel)]="user.password">
+                        <input type="password" class="form-control form-control-sm" name="password" #password="ngModel" [(ngModel)]="user.password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" required>
                     </div>
                     <div class="form-group">
-                        <label for="passwordRepeat" class="col-form-label col-form-label-sm">Repetir contraseña</label>
+                        <label for="passwordRepeat" class="col-form-label col-form-label-sm" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" required>Repetir contraseña</label>
                         <input type="password" name="passwordRepeat" class="form-control">
                     </div>
                     <div class="modal-footer">

@@ -27,6 +27,35 @@ body {
     margin-top: 5px !important;
 }
 
+.parrafoIdentidad {
+    margin-top: 10px;
+}
+
+.dropdown-toggle {
+    margin-left: 890px;
+}
+
+.dropdown-menu {
+    margin-left: 857px;
+}
+
+.dropdown-menu .btn-outline-warning {
+    margin-left: 25px !important;
+}
+
+
+/* MENSAJE ERROR VALIDADOR REGISTRO */
+
+
+/* .alert-name {
+    border-style: solid;
+    font-size: 14px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: red;
+    background: red;
+} */
+
 
 /* 
 .contenedor {

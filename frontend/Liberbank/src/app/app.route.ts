@@ -7,16 +7,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
-import { PerfilComponent } from './component/perfil/perfil.component';
+import { SaldoComponent } from './component/saldo/saldo.component';
+import { TransferenciasComponent } from './component/transferencias/transferencias.component';
+import { TransferenciasPeriodicasComponent } from './component/transferencias-periodicas/transferencias-periodicas.component'
+import { HomeComponent } from './component/home/home.component';
 
 // Array de routas
 
  const appRoutes: Routes = [
 
-     { path: '', component:  LoginComponent},
+     { path: '', component: HomeComponent },
      { path: 'login', component: LoginComponent },
-     { path: 'perfil', component: PerfilComponent }
-
+     { path: 'saldo', component: SaldoComponent },
+     { path: 'transferencias', component: TransferenciasComponent },
+     { path: 'transferencias-periodicas', component: TransferenciasPeriodicasComponent },
 
  ]
  //Exportar el módulo del router

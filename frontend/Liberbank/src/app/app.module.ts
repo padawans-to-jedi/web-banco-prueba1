@@ -7,13 +7,19 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
-import { PerfilComponent } from './component/perfil/perfil.component';
+import { SaldoComponent } from './component/saldo/saldo.component';
+import { TransferenciasComponent } from './component/transferencias/transferencias.component';
+import { TransferenciasPeriodicasComponent } from './component/transferencias-periodicas/transferencias-periodicas.component';
+import { HomeComponent } from './component/home/home.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PerfilComponent,
+    SaldoComponent,
+    TransferenciasComponent,
+    TransferenciasPeriodicasComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
