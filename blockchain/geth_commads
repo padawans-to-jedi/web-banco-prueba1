@@ -5,7 +5,7 @@ geth --datadir=./chaindata init ./genesis.json
 geth --datadir=./chaindata console
 
 sc address
-0x537E7A99f675705f8fb4197A90255a105cFcd4c4
+0x537E7A99f675705f8fb4197A90255a105cFcd4c4 casa
 
 solc liberbank.sol --bin --abi --optimize -o ./
 
