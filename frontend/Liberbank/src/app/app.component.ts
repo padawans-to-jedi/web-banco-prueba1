@@ -34,7 +34,7 @@ export class AppComponent implements OnInit{
   logOut() {
     localStorage.clear();
     this.identity = null;
-    this._router.navigate[''];
+    this._router.navigate(['']);
   }
 
 

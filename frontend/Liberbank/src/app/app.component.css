@@ -46,15 +46,52 @@ body {
 
 /* MENSAJE ERROR VALIDADOR REGISTRO */
 
-
-/* .alert-name {
+.alert-name {
     border-style: solid;
     font-size: 14px;
     border-radius: 5px;
     border-width: 1px;
-    border-color: red;
-    background: red;
-} */
+    border-color: #f5c6cb;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0px 133px;
+    margin-left: 1px;
+}
+
+.alert-name-email {
+    border-style: solid;
+    font-size: 14px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #f5c6cb;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0px 95px;
+    margin-left: 1px;
+}
+
+.alert-name-country {
+    border-style: solid;
+    font-size: 14px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #f5c6cb;
+    background: #f8d7da;
+    color: #721c24;
+    margin-left: 1px;
+}
+
+.alert-name-street {
+    border-style: solid;
+    font-size: 14px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #f5c6cb;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0px 14px;
+    margin-left: 1px;
+}
 
 
 /* 
