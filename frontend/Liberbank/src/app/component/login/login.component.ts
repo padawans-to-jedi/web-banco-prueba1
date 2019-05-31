@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   public user: Login;
   public apiUser: User;
   public status: string;
+  public identity;
 
   constructor(
     private _userRegisterService: UserRegistreService,
@@ -25,6 +26,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     console.log('componente login cargado...')
+    
+    this.identity = this._userRegisterService.getUserLogin();
+    console.log(this.identity)
   }
 
   acceder(form) {

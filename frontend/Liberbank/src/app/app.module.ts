@@ -10,7 +10,6 @@ import { LoginComponent } from './component/login/login.component';
 import { SaldoComponent } from './component/saldo/saldo.component';
 import { TransferenciasComponent } from './component/transferencias/transferencias.component';
 import { TransferenciasPeriodicasComponent } from './component/transferencias-periodicas/transferencias-periodicas.component';
-import { HomeComponent } from './component/home/home.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { HomeComponent } from './component/home/home.component'
     SaldoComponent,
     TransferenciasComponent,
     TransferenciasPeriodicasComponent,
-    HomeComponent,
   ],
   imports: [
     BrowserModule,

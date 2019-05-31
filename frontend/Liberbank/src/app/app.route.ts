@@ -9,14 +9,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { SaldoComponent } from './component/saldo/saldo.component';
 import { TransferenciasComponent } from './component/transferencias/transferencias.component';
-import { TransferenciasPeriodicasComponent } from './component/transferencias-periodicas/transferencias-periodicas.component'
-import { HomeComponent } from './component/home/home.component';
+import { TransferenciasPeriodicasComponent } from './component/transferencias-periodicas/transferencias-periodicas.component';
 
 // Array de routas
 
  const appRoutes: Routes = [
-
-     { path: '', component: HomeComponent },
      { path: 'login', component: LoginComponent },
      { path: 'saldo', component: SaldoComponent },
      { path: 'transferencias', component: TransferenciasComponent },

@@ -13,12 +13,12 @@
                 <form #registerForm="ngForm" (ngSubmit)="acceder(registerForm)">
                     <div class="form-group">
                         <label for="name" class="col-form-label col-form-label-sm">Nombre de usuario</label>
-                        <input type="text" class="form-control form-control-sm" name="userName" #userName="ngModel" [(ngModel)]="userLogin.userName" aria-describedby="name" placeholder="Introduce correo electrónico" pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
+                        <input type="text" class="form-control form-control-sm" name="userName" #userName="ngModel" [(ngModel)]="user.userName" aria-describedby="name" placeholder="Introduce correo electrónico" pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
                         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-sm-2 col-form-label col-form-label-sm">Contraseña</label>
-                        <input type="password" class="form-control form-control-sm" name="password" #password="ngModel" [(ngModel)]="userLogin.password" placeholder="Introduce tu contraseña">
+                        <input type="password" class="form-control form-control-sm" name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Introduce tu contraseña">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
@@ -32,7 +32,7 @@
 </div>
 
 <!-- PERFIL DEL USUARIO -->
-<div class="card-deck">
+<div class="card-deck" *ngIf="!identity">
     <div class="card">
 
         <div class="card-body">
