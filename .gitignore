@@ -33,3 +33,5 @@ blockchain/private-chain/chaindata/keystore/UTC--2019-05-30T18-29-12.451263000Z-
 blockchain/private-chain/chaindata/history
 blockchain/private-chain/chaindata/geth/chaindata/LOG
 blockchain/private-chain/chaindata/geth/chaindata/CURRENT.bak
+blockchain/private-chain/chaindata/geth/nodes/MANIFEST-000004
+blockchain/private-chain/chaindata/geth/nodes/MANIFEST-000004
