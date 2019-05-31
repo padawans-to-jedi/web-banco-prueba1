@@ -4,6 +4,10 @@ geth --datadir=./chaindata init ./genesis.json
 
 geth --datadir=./chaindata console
 
+$ geth --port 3000 --networkid 58343 --nodiscover --datadir=./blkchain --maxpeers=0  --rpc --rpcport 8543 --rpcaddr 127.0.0.1 --rpccorsdomain "*" --rpcapi "eth,net,web3,personal,miner"
+
+geth --datadir . account new
+
 sc address
 0x537E7A99f675705f8fb4197A90255a105cFcd4c4 casa
 

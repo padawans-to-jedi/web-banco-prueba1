@@ -9,7 +9,7 @@ import com.padawans.wrapper.contracts.DemoBank;
 public interface ContractService {
 
 	
-	Optional<DemoBank> loadContract(Credentials credentials);
+	DemoBank loadContract(Credentials credentials);
 	 Optional<DemoBank> getDemoBank() ;
 	
 }
