@@ -2,6 +2,8 @@ package com.liberbank.apigateway.service.impl;
 
 import java.util.Optional;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ import com.liberbank.apigateway.utils.DataUtils;
 @Service
 public class LoginServiceImpl implements LoginService {
 
+
+	
 	@Autowired
     AuthenticationManager authenticationManager;
 	
@@ -33,6 +37,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
     UserRpository userRepository;
+	
 	
 	@Override
 	public ResponseEntity<LoginResponse> loginPost(LoginRequest loginRequest) {
