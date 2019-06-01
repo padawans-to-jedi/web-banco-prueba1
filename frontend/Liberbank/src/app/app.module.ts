@@ -10,6 +10,7 @@ import { LoginComponent } from './component/login/login.component';
 import { SaldoComponent } from './component/saldo/saldo.component';
 import { TransferenciasComponent } from './component/transferencias/transferencias.component';
 import { TransferenciasPeriodicasComponent } from './component/transferencias-periodicas/transferencias-periodicas.component';
+import { DatosPersonalesComponent } from './component/datos-personales/datos-personales.component'; 
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TransferenciasPeriodicasComponent } from './component/transferencias-pe
     SaldoComponent,
     TransferenciasComponent,
     TransferenciasPeriodicasComponent,
+    DatosPersonalesComponent
   ],
   imports: [
     BrowserModule,

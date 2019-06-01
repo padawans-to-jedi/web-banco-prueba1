@@ -4,9 +4,9 @@
         <div class="collapse navbar-collapse">
 
             <div class="navbar-header">
-                <a href="#" class="navbar-brand">
+                <li class="navbar-brand">
                     <img src="../assets/img/liberbank-reto.png" width="30" height="30" alt="">
-                </a>
+                </li>
             </div>
 
             <ul class="navbar-nav" *ngIf="!identity">
@@ -30,7 +30,11 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-
+                        <li>
+                            <a [routerLink]="['/login']">
+                                <span class="dropdown-item"> Inicio </span>
+                            </a>
+                        </li>
                         <li>
                             <a [routerLink]="['/saldo']">
                                 <span class="dropdown-item"> Consultar saldo </span>
@@ -44,6 +48,11 @@
                         <li>
                             <a [routerLink]="['/transferencias']">
                                 <span class="dropdown-item"> Tranferencias </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/datos-personales']">
+                                <span class="dropdown-item"> Datos personales </span>
                             </a>
                         </li>
                         <li>

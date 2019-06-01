@@ -6,18 +6,18 @@ export class User {
         public surname: string,
         public phone: string,
         public email: string,
-        public address: {
-            street: string,
-            country: string,
-            number: string,
-            floor: string,
-            postalCode: string,
-        },
-        public products: [{
-            productID: string,
-            productName: string
-        }]
+        public address: Address
     ) {}
 
 
+}
+
+export class Address {
+    constructor( 
+        public street: string,
+        public country: string,
+        public number: string,
+        public floor: string,
+        public postalCode: string
+    ){}
 }

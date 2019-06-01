@@ -32,36 +32,46 @@
 </div>
 
 <!-- PERFIL DEL USUARIO -->
-<div class="card-deck" *ngIf="identity">
-    <div class="card">
+<div *ngIf="identity">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Liberbank</h1>
+            <p class="lead">Bienvenido a tu banco.</p>
+        </div>
+    </div>
+    <br>
+    <div class="card-deck">
 
-        <div class="card-body">
-            <h5 class="card-title">Consultar saldo</h5>
-            <p class="card-text">Siempre informado de lo que aún puedes disfrutar!</p>
-            <a [routerLink]="['/saldo']" class="btn btn-primary">Acceder</a>
+        <div class="card">
+
+            <div class="card-body">
+                <h5 class="card-title">Consultar saldo</h5>
+                <p class="card-text">Siempre informado de lo que aún puedes disfrutar!</p>
+                <a [routerLink]="['/saldo']" class="btn btn-primary">Acceder</a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Revisa tu saldo actual.</small>
+            </div>
         </div>
-        <div class="card-footer">
-            <small class="text-muted">Revisa tu saldo actual.</small>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Transferencias</h5>
+                <p class="card-text">Aquí podrás tener acceso a las transferencias realizadas con esta cuenta.</p>
+                <a [routerLink]="['/transferencias']" class="btn btn-primary">Acceder</a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Transferencias nacionales o al extranjero.</small>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Transferencias</h5>
-            <p class="card-text">Aquí podrás tener acceso a las transferencias realizadas con esta cuenta.</p>
-            <a [routerLink]="['/transferencias']" class="btn btn-primary">Acceder</a>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Transferencias nacionales o al extranjero.</small>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Transferencias Periodicas</h5>
-            <p class="card-text">Olvídate de gestiones!</p>
-            <a [routerLink]="['/transferencias-periodicas']" class="btn btn-primary">Acceder</a>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Realiza transferencias periodicas.</small>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Transferencias Periodicas</h5>
+                <p class="card-text">Olvídate de gestiones!</p>
+                <a [routerLink]="['/transferencias-periodicas']" class="btn btn-primary">Acceder</a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Realiza transferencias periodicas.</small>
+            </div>
         </div>
     </div>
 </div>

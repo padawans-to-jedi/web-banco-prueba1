@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserRegistreService } from '../../service/userRegister.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Login } from '../../model/login';
-import { User } from '../../model/user';
+import { User, Address } from '../../model/user';
   
 @Component({
   selector: 'app-login',
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     private _router: Router
   ) { 
     this.user = new Login ("","");
+    this.apiUser = new User("","","","","", new Address("","","","",""));
   }
 
   ngOnInit() {
