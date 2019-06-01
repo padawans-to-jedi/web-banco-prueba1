@@ -6,7 +6,8 @@ export class User {
         public surname: string,
         public phone: string,
         public email: string,
-        public address: Address
+        public address: Address,
+        public bearer: string
     ) {}
 
 
@@ -20,4 +21,12 @@ export class Address {
         public floor: string,
         public postalCode: string
     ){}
+}
+
+export class Token {
+    constructor(
+        public tokenType: string,
+        public tokenAccess: string
+    ){}
+    
 }

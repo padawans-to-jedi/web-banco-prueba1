@@ -1,7 +1,13 @@
 <div class="bg-contact2">
     <div class="container-contact2">
         <div class="wrap-contact2">
-            <form class="contact2-form" #formModificate="ngForm" (onSubmit)="modificar(formModificate)">
+            <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
+                <span>Registro completado correctamente. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
+            </div>
+            <div class="alert alert-danger" *ngIf="status == 'error'">
+                <span>Registro no completado, vuelva a intentarlo. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
+            </div>
+            <form class="contact2-form" #formModificate="ngForm" (ngSubmit)="modificar()">
                 <span class="contact2-form-title">
                     Datos Personales
                 </span>
@@ -11,11 +17,11 @@
                 </div>
 
                 <div class="wrap-input2">
-                    <input class="input2" type="number" placeholder="{{datosUsuario.phone}}" minlength="9" maxlength="15" required>
+                    <input class="input2" type="text" placeholder={{datosUsuario.phone}} name="phone" #phone="ngModel" [(ngModel)]="datosUsuario.phone" minlength="9" maxlength="15" required>
                 </div>
 
                 <div class="wrap-input2">
-                    <input class="input2" type="email" placeholder="{{datosUsuario.email}}" pattern="^[a-zA-Z0-9-@.]+$" minlength="6" maxlength="30" required>
+                    <input class="input2" type="email" placeholder={{datosUsuario.email}} name="email" #email="ngModel" [(ngModel)]="datosUsuario.email" pattern="^[a-zA-Z0-9-@.]+$" minlength="6" maxlength="30" required>
                 </div>
 
                 <div class="wrap-input2">

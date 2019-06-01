@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UserRegistre } from '../model/userRegistre';
 import { Login } from '../model/login';
+import { User, Token } from '../model/user';
 import { GLOBAL } from '../model/Global';
 import { sha256 } from 'js-sha256';
   
@@ -11,12 +12,13 @@ import { sha256 } from 'js-sha256';
 export class UserRegistreService {
 
     public url: string;
-    public apiUser;
-
+    public apiUser: User;
+    
     constructor(
        public _http: HttpClient
     ) {
         this.url = GLOBAL.url
+        this.apiUser  = JSON.parse(localStorage.getItem('userLogin'));
     }
 
     registrado(userRegister: UserRegistre): Observable<any>{
@@ -49,6 +51,15 @@ export class UserRegistreService {
         }
 
         return this.apiUser;
+    }
+
+    updateUser( user: User): Observable<any> {
+
+        let json = JSON.stringify(user);
+        console.log(user)
+        let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+ this.apiUser.bearer);
+        console.log(headers)
+        return this._http.put(this.url + 'users/'+  user.userID, json, {headers: headers})
     }
 
 }

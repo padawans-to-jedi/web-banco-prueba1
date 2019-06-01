@@ -110,7 +110,7 @@
                     </div>
                     <div class="form-group">
                         <label for="phone" class="col-sm-2 col-form-label col-form-label-sm">Teléfono</label>
-                        <input type="number" class="form-control form-control-sm" name="phone" #phone="ngModel" [(ngModel)]="user.phone" minlength="9" maxlength="15" required>
+                        <input type="text" class="form-control form-control-sm" name="phone" #phone="ngModel" [(ngModel)]="user.phone" minlength="9" maxlength="15" required>
                         <span *ngIf="phone.invalid && phone.touched && phone.dirty" class="alert-name" role="alert">Introduzca mínimo 9 caracteres.</span>
                     </div>
                     <div class="form-group">

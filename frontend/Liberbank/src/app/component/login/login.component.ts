@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   public apiUser: User;
   public status: string;
   public identity;
+  public guardarDatos;
 
   constructor(
     private _userRegisterService: UserRegistreService,
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     private _router: Router
   ) { 
     this.user = new Login ("","");
-    this.apiUser = new User("","","","","", new Address("","","","",""));
+    this.apiUser = new User("","","","","", new Address("","","","",""), "");
   }
 
   ngOnInit() {
@@ -42,7 +43,8 @@ export class LoginComponent implements OnInit {
       /* GUARDAMOS LOS DATOS DEL USUARIO EN SESION */
        localStorage.setItem('userLogin', JSON.stringify(this.apiUser));
        console.log('Usuario Logeado')
-       JSON.parse(localStorage.getItem('userLogin'))
+       this.guardarDatos = JSON.parse(localStorage.getItem('userLogin'))
+       console.log(this.guardarDatos)
        
        if(this.apiUser) {
           this.status = 'success'
