@@ -1,0 +1,120 @@
+body {
+    padding-top: 70px;
+    background-image: url('../assets/img/fondo.jpg');
+}
+
+.navigation {
+    padding: 0px !important;
+    border-radius: 0px !important;
+}
+
+.navigation .navbar {
+    border-radius: 0px !important;
+}
+
+.navbar-brand img {
+    width: 110px;
+}
+
+.btn-warning {
+    padding: 1px !important;
+    margin-top: 6px !important;
+}
+
+.btn-outline-warning {
+    margin-left: 7px !important;
+    padding: 2px !important;
+    margin-top: 5px !important;
+}
+
+.parrafoIdentidad {
+    margin-top: 10px;
+}
+
+.dropdown-toggle {
+    margin-left: 827px;
+}
+
+.dropdown-menu {
+    margin-left: 814px;
+}
+
+.dropdown-menu .btn-outline-warning {
+    margin-left: 25px !important;
+}
+
+
+/* MENSAJE ERROR VALIDADOR REGISTRO */
+
+.alert-name {
+    border-style: solid;
+    font-size: 14px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #f5c6cb;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0px 133px;
+    margin-left: 1px;
+}
+
+.alert-name-email {
+    border-style: solid;
+    font-size: 14px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #f5c6cb;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0px 95px;
+    margin-left: 1px;
+}
+
+.alert-name-country {
+    border-style: solid;
+    font-size: 14px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #f5c6cb;
+    background: #f8d7da;
+    color: #721c24;
+    margin-left: 1px;
+}
+
+.alert-name-street {
+    border-style: solid;
+    font-size: 14px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #f5c6cb;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0px 14px;
+    margin-left: 1px;
+}
+
+
+/* 
+.contenedor {
+    text-align: center;
+}
+
+.contenedor img {
+    position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 57px;
+    right: 0px;
+} */
+
+
+/* BOTON SOBRE IMAGEN DE FONDO */
+
+
+/* .boton {
+            position: absolute;
+            top: 75%;
+            left: 50%;
+            border-radius: 15px;
+            transform: translate(-50%, -50%);
+} */

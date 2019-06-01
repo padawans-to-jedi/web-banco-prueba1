@@ -1,0 +1,40 @@
+<div class="bg-contact2">
+    <div class="container-contact2">
+        <div class="wrap-contact2">
+            <form class="contact2-form" #formModificate="ngForm" (onSubmit)="modificar(formModificate)">
+                <span class="contact2-form-title">
+                    Datos Personales
+                </span>
+
+                <div class="wrap-input2">
+                    <input class="input2" type="text" placeholder="{{datosUsuario.name}} {{datosUsuario.surname}}" readonly>
+                </div>
+
+                <div class="wrap-input2">
+                    <input class="input2" type="number" placeholder="{{datosUsuario.phone}}" minlength="9" maxlength="15" required>
+                </div>
+
+                <div class="wrap-input2">
+                    <input class="input2" type="email" placeholder="{{datosUsuario.email}}" pattern="^[a-zA-Z0-9-@.]+$" minlength="6" maxlength="30" required>
+                </div>
+
+                <div class="wrap-input2">
+                    <input class="input2" type="text" placeholder="{{datosUsuario.address.country}}" readonly>
+                </div>
+
+                <div class="wrap-input2">
+                    <input class="input2" type="text" placeholder="{{datosUsuario.address.street}}" readonly>
+                </div>
+
+                <div class="wrap-input2">
+                    <input class="input2" type="text" placeholder="{{datosUsuario.address.number}}" readonly>
+                </div>
+
+                <div class="wrap-input2">
+                    <input class="input2" type="text" placeholder="{{datosUsuario.address.floor}}" readonly>
+                </div>
+                <input type="submit" class="btn btn-info btn-lg btn-block" value="Modificar datos">
+            </form>
+        </div>
+    </div>
+</div>

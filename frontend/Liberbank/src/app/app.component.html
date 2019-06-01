@@ -1,20 +1,164 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- Barra de Navegación -->
+<div class="navigation col-lg-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse">
 
+            <div class="navbar-header">
+                <li class="navbar-brand">
+                    <img src="../assets/img/liberbank-reto.png" width="30" height="30" alt="">
+                </li>
+            </div>
+
+            <ul class="navbar-nav" *ngIf="!identity">
+                <li>
+                    <a [routerLink]="['/login']">
+                        <span class="btn btn-warning" data-toggle="modal" data-target="#modalAcceso"> Acceso Clientes </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="btn btn-outline-warning" data-toggle="modal" data-target="#modalRegistro"> Registrate </span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav float-right" *ngIf="identity">
+                <li class="dropdown">
+                    <a class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" href="#">
+                        Bienvenido {{identity.name}} {{identity.surname}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a [routerLink]="['/login']">
+                                <span class="dropdown-item"> Inicio </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/saldo']">
+                                <span class="dropdown-item"> Consultar saldo </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/transferencias-periodicas']">
+                                <span class="dropdown-item">Tranferencias Periodicas </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/transferencias']">
+                                <span class="dropdown-item"> Tranferencias </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/datos-personales']">
+                                <span class="dropdown-item"> Datos personales </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span class="btn btn-outline-warning" (click)="logOut()"> cerrar sesion </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Imagen de fondo -->
+    <div class="fondo" *ngIf="!identity">
+        <div class="contenedor">
+            <img src="../../../assets/img/fondo.jpg" class="w-100" />
+            <!-- Boton sobre imagen de fondo -->
+            <!-- <button type="button" class="btn btn-warning boton">Acceso Clientes</button> -->
+        </div>
+    </div>
+</div>
+
+
+
+<!-- MODAL REGISTRO -->
+<!-- Modal -->
+<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="modalRegistro" aria-hidden="true" *ngIf="!identity">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalRegistro">Registro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
+                    <span>Registro completado correctamente. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
+                </div>
+                <div class="alert alert-danger" *ngIf="status == 'error'">
+                    <span>Registro no completado, vuelva a intentarlo. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
+                </div>
+                <form #registerForm="ngForm" (ngSubmit)="resgistrar(registerForm)" *ngIf="showForm">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
+                        <br>
+                        <input type="text" class="form-control form-control-sm" name="name" #name="ngModel" [(ngModel)]="user.name" minlength="3" required>
+                        <!-- MENSAJE VALIDADOR ERROR -->
+                        <span *ngIf="name.invalid && name.touched && name.dirty" class="alert-name" role="alert">Introduzca mínimo 3 caracteres.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="surname" class="col-sm-2 col-form-label col-form-label-sm">Apellidos</label>
+                        <input type="text" class="form-control form-control-sm" name="surname" #surname="ngModel" [(ngModel)]="user.surname" minlength="3" required>
+                        <span *ngIf="surname.invalid && surname.touched && surname.dirty" class="alert-name" role="alert">Introduzca mínimo 3 caracteres.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 col-form-label col-form-label-sm">Teléfono</label>
+                        <input type="number" class="form-control form-control-sm" name="phone" #phone="ngModel" [(ngModel)]="user.phone" minlength="9" maxlength="15" required>
+                        <span *ngIf="phone.invalid && phone.touched && phone.dirty" class="alert-name" role="alert">Introduzca mínimo 9 caracteres.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-form-label col-form-label-sm">Correo electrónico</label>
+                        <input type="email" class="form-control form-control-sm" name="email" #email="ngModel" [(ngModel)]="user.email" pattern="^[a-zA-Z0-9-@.]+$" minlength="6" maxlength="30" required>
+                        <span *ngIf="email.invalid && email.touched && email.dirty" class="alert-name-email" role="alert">Introduzca el formato de correo electrónico.</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country" class="col-sm-2 col-form-label col-form-label-sm">Ciudad</label>
+                            <input type="text" class="form-control form-control-sm" name="country" #country="ngModel" [(ngModel)]="user.address.country" minlength="3" required>
+                            <span *ngIf="country.invalid && country.touched && country.dirty" class="alert-name-country" role="alert">Introduzca mínimo 3 caracteres.</span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="street" class="col-sm-2 col-form-label col-form-label-sm">Calle</label>
+                            <input type="text" class="form-control form-control-sm" name="street" #street="ngModel" [(ngModel)]="user.address.street" minlength="3" required>
+                            <span *ngIf="street.invalid && street.touched && street.dirty" class="alert-name-street" role="alert">Introduzca mínimo 3 caracteres.</span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="number" class="col-sm-2 col-form-label col-form-label-sm">Número</label>
+                            <input type="text" class="form-control form-control-sm" name="number" #number="ngModel" [(ngModel)]="user.address.number" minlength="1" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="floor" class="col-sm-2 col-form-label col-form-label-sm">Planta</label>
+                            <input type="text" class="form-control form-control-sm" name="floor" #floor="ngModel" [(ngModel)]="user.address.floor" minlength="1" required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="postalCode" class="col-sm-2 col-form-label col-form-label-sm">CP</label>
+                            <input type="text" class="form-control form-control-sm" name="postalCode" #postalCode="ngModel" [(ngModel)]="user.address.postalCode" minlength="4" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 col-form-label col-form-label-sm">Contraseña</label>
+                        <input type="password" class="form-control form-control-sm" name="password" #password="ngModel" [(ngModel)]="user.password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordRepeat" class="col-form-label col-form-label-sm" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" required>Repetir contraseña</label>
+                        <input type="password" name="passwordRepeat" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <input type="submit" class="btn btn-success" value="Registrar">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
