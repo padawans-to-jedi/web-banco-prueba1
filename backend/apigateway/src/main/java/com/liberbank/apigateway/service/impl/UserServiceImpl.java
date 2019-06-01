@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
 	public ResponseEntity<MessageResponse> usersUserIDPut(@Min(1) Long userID, @Valid UserDataUpdate userdata) {
 		UserDAO user = userRepository.findById(userID).orElseThrow(() -> new UserRepositoryException("Usuario no Encontrado"));
 		user.setPhone(userdata.getPhone());
+		//user.setUserName(userdata.getEmail());
 		try {
 			userRepository.save(user);
 		} catch (Exception e) {
