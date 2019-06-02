@@ -5,6 +5,9 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.padawans.hackaton.apigateway.service.AccountService;
 import com.padawans.hackaton.generated.api.AccountsApi;
@@ -12,6 +15,8 @@ import com.padawans.hackaton.generated.model.AccountsDto;
 import com.padawans.hackaton.generated.model.BalancesResponseDto;
 import com.padawans.hackaton.generated.model.TransactionResponseDto;
 
+@Controller
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET })
 public class AccountsController implements AccountsApi {
 
 	@Autowired
