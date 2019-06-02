@@ -8,10 +8,10 @@
 		<version>2.1.5.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.padawans</groupId>
-	<artifactId>wrapper</artifactId>
+	<groupId>com.padawans.hackaton</groupId>
+	<artifactId>hackaton-wrapper</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>wrapper</name>
+	<name>hackaton-wrapper</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

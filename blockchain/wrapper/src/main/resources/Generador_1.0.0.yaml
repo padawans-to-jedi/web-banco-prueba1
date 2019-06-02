@@ -23,6 +23,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PaymentResponse'
+        default:
+          description: error inesperado
+          schema: 
+            $ref: '#/definitions/ErrorResponse'
           
 definitions:
   PaymentRequest:
@@ -52,6 +56,19 @@ definitions:
       timestamp:
         type: integer
         format: int64
+        
+  ErrorResponse:
+    type: object
+    description: Tipo de error ocurrido.
+    properties:
+      mensaje:
+        type: string
+        maxLength: 250
+        pattern: "[^A-Za-z0-9]"
+      tipo:
+        type: string
+        maxLength: 250
+        pattern: "[^A-Za-z0-9]"
     
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com

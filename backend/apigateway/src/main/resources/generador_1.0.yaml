@@ -35,6 +35,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/LoginResponse'
+        default:
+          description: error inesperado
+          schema: 
+            $ref: '#/definitions/ErrorResponse'
   /registry:
     post:
       tags: 
@@ -56,6 +60,10 @@ paths:
           description: CREATED
           schema:
             $ref: '#/definitions/MessageResponse'
+        default:
+          description: error inesperado
+          schema: 
+            $ref: '#/definitions/ErrorResponse'
     
   /users/{userID}/products:
     post:
@@ -78,7 +86,10 @@ paths:
       responses:
         200:
           description: OK    
-    
+        default:
+          description: error inesperado
+          schema: 
+            $ref: '#/definitions/ErrorResponse'
 
 
 definitions:
@@ -194,6 +205,18 @@ definitions:
       productName:
         type: string
     
+  ErrorResponse:
+    type: object
+    description: Tipo de error ocurrido.
+    properties:
+      mensaje:
+        type: string
+        maxLength: 250
+        pattern: "[^A-Za-z0-9]"
+      tipo:
+        type: string
+        maxLength: 250
+        pattern: "[^A-Za-z0-9]"
 
 
 # Added by API Auto Mocking Plugin
