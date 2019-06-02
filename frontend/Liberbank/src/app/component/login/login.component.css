@@ -2,3 +2,8 @@
     padding: 14px;
     margin-top: -48px;
 }
+
+.btn-success {
+    background-color: #00A38D;
+    border-color: #00A38D;
+}

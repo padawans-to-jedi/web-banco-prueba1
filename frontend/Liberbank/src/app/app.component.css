@@ -16,9 +16,44 @@ body {
     width: 110px;
 }
 
-.btn-warning {
-    padding: 1px !important;
-    margin-top: 6px !important;
+.btn-success {
+    background-color: #00A38D;
+    border-color: #00A38D;
+}
+
+.boton-acceso {
+    color: #00A38D;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 25px;
+}
+
+.boton-acceso:hover {
+    text-decoration: skip !important;
+    list-style: none !important;
+    color: black;
+    font-size: 16px;
+}
+
+.boton-login {
+    color: #00A38D;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.boton-login:hover {
+    text-decoration: skip !important;
+    list-style: none !important;
+    color: black;
+    font-size: 16px;
+}
+
+.boton-logout {
+    color: #00A38D;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .btn-outline-warning {
@@ -93,19 +128,13 @@ body {
     margin-left: 1px;
 }
 
-
-/* 
-.contenedor {
-    text-align: center;
-}
-
 .contenedor img {
     position: fixed;
     background-size: cover;
     background-repeat: no-repeat;
     top: 57px;
-    right: 0px;
-} */
+    width: 100%;
+}
 
 
 /* BOTON SOBRE IMAGEN DE FONDO */

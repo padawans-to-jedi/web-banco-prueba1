@@ -7,19 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
-import { SaldoComponent } from './component/saldo/saldo.component';
-import { TransferenciasComponent } from './component/transferencias/transferencias.component';
-import { TransferenciasPeriodicasComponent } from './component/transferencias-periodicas/transferencias-periodicas.component';
-import { DatosPersonalesComponent } from './component/datos-personales/datos-personales.component'; 
+import { DatosPersonalesComponent } from './component/datos-personales/datos-personales.component';
+import { BlockchainComponent } from './component/blockchain/blockchain.component';
+import { TransaccionesComponent } from './component/transacciones/transacciones.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SaldoComponent,
-    TransferenciasComponent,
-    TransferenciasPeriodicasComponent,
-    DatosPersonalesComponent
+    DatosPersonalesComponent,
+    BlockchainComponent,
+    TransaccionesComponent
   ],
   imports: [
     BrowserModule,

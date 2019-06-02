@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UserRegistre } from '../model/userRegistre';
 import { Login } from '../model/login';
-import { User, Token } from '../model/user';
+import { User } from '../model/user';
 import { GLOBAL } from '../model/Global';
 import { sha256 } from 'js-sha256';
   

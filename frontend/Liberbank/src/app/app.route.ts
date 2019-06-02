@@ -7,17 +7,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
-import { SaldoComponent } from './component/saldo/saldo.component';
-import { TransferenciasComponent } from './component/transferencias/transferencias.component';
-import { TransferenciasPeriodicasComponent } from './component/transferencias-periodicas/transferencias-periodicas.component';
 import { DatosPersonalesComponent } from './component/datos-personales/datos-personales.component';
+import { BlockchainComponent } from './component/blockchain/blockchain.component';
+import { TransaccionesComponent } from './component/transacciones/transacciones.component';
 // Array de routas
 
  const appRoutes: Routes = [
      { path: 'login', component: LoginComponent },
-     { path: 'saldo', component: SaldoComponent },
-     { path: 'transferencias', component: TransferenciasComponent },
-     { path: 'transferencias-periodicas', component: TransferenciasPeriodicasComponent },
+     { path: 'blockchain', component: BlockchainComponent },
+     { path: 'transacciones', component: TransaccionesComponent },
      { path: 'datos-personales', component: DatosPersonalesComponent }
 
  ]

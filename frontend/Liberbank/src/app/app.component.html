@@ -11,14 +11,14 @@
 
             <ul class="navbar-nav" *ngIf="!identity">
                 <li>
-                    <a [routerLink]="['/login']">
-                        <span class="btn btn-warning" data-toggle="modal" data-target="#modalAcceso"> Acceso Clientes </span>
+                    <a [routerLink]="['/login']" class="boton-acceso">
+                        <span data-toggle="modal" data-target="#modalAcceso">Acceso Clientes</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
-                        <span class="btn btn-outline-warning" data-toggle="modal" data-target="#modalRegistro"> Registrate </span>
+                    <a href="#" class="boton-login">
+                        <span data-toggle="modal" data-target="#modalRegistro"> Registrate </span>
                     </a>
                 </li>
             </ul>
@@ -36,18 +36,13 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/saldo']">
-                                <span class="dropdown-item"> Consultar saldo </span>
+                            <a [routerLink]="['/blockchain']">
+                                <span class="dropdown-item"> Blockchain </span>
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/transferencias-periodicas']">
-                                <span class="dropdown-item">Tranferencias Periodicas </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/transferencias']">
-                                <span class="dropdown-item"> Tranferencias </span>
+                            <a [routerLink]="['/transacciones']">
+                                <span class="dropdown-item">Transacciones </span>
                             </a>
                         </li>
                         <li>
@@ -57,7 +52,7 @@
                         </li>
                         <li>
                             <a>
-                                <span class="btn btn-outline-warning" (click)="logOut()"> cerrar sesion </span>
+                                <span class="boton-logout" (click)="logOut()"> Cerrar sesion </span>
                             </a>
                         </li>
                     </ul>
@@ -68,7 +63,7 @@
     <!-- Imagen de fondo -->
     <div class="fondo" *ngIf="!identity">
         <div class="contenedor">
-            <img src="../../../assets/img/fondo.jpg" class="w-100" />
+            <img src="../../../assets/img/fondo.jpg" />
             <!-- Boton sobre imagen de fondo -->
             <!-- <button type="button" class="btn btn-warning boton">Acceso Clientes</button> -->
         </div>

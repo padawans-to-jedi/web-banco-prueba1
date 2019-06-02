@@ -1,0 +1,85 @@
+body {
+    background-image: url('../../../assets/img/datos.jpg');
+}
+
+@font-face {
+    font-family: 'Open';
+    src: url('../../../assets/font/Open.ttf');
+}
+
+.contenedor img {
+    position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    margin-top: -53px;
+    margin-left: -8px;
+    font-family: 'Open';
+}
+
+.contenedor-pequeno {
+    height: 81%;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    border-radius: 15px;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: #2b748978;
+    width: 50%;
+    font-family: 'Open';
+}
+
+input {
+    margin-left: 3%;
+    width: 91%;
+    border-radius: 9px;
+    padding: 7px;
+    border: none;
+    text-align: center;
+    font-family: 'Open';
+    margin-top: 1%;
+}
+
+button {
+    margin-left: 44%;
+    font-family: 'Open';
+}
+
+.span {
+    margin-top: 28px;
+    font-size: 31px;
+    margin-left: 37%;
+    color: whitesmoke;
+    font-family: 'Open';
+    margin-bottom: 4%;
+}
+
+.demo {
+    margin-left: 9%;
+}
+
+.demo input[type="checkbox"] {
+    display: none;
+}
+
+.demo input[type="checkbox"]+label span {
+    color: white;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url('../../../assets/img/sinPulsar.png');
+    background-size: cover;
+    cursor: pointer;
+}
+
+.demo input[type="checkbox"]+label {
+    color: white
+}
+
+.demo input[type="checkbox"]:checked+label span {
+    background: url('../../../assets/img/pulsando.png');
+    background-size: cover;
+}

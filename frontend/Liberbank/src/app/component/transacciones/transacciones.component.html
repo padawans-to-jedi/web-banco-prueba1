@@ -1,0 +1,24 @@
+<div class="contenedor">
+    <img src="../../../assets/img/datos.jpg" />
+    <div class="contenedor-pequeno">
+        <div class="span">
+            <span>Transacciones</span>
+        </div>
+
+        <form>
+            <input type="text" placeholder="País">
+            <input type="text" placeholder="Nombre y apellidos del beneficiario">
+            <input type="" name="iban" placeholder="Número de cuenta del beneficiario" pattern="^ES\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$">
+            <input type="text" placeholder="Residencia del beneficiario">
+            <input type="text" placeholder="Importe(EUR)">
+            <input type="text" placeholder="Concepto">
+            <div class="demo">
+                <p>
+                    <input type="checkbox" id="acepto" name="acepto">
+                    <label for="acepto"><span></span>Transferencia periódica</label>
+                </p>
+            </div>
+            <button type="submit" class="btn btn-info">Enviar</button>
+        </form>
+    </div>
+</div>
