@@ -1,4 +1,4 @@
-package com.liberbank.apigateway.dao;
+package com.padawans.hackaton.apigateway.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

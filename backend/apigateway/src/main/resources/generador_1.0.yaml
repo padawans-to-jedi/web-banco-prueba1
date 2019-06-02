@@ -257,10 +257,7 @@ paths:
         500:
           description: 500 Internal Server Error
           schema:
-            $ref: '#/definitions/error'
-      security:
-      - oauth-third-party-providers:
-        - accountsList
+            $ref: '#/definitions/error'      
         
   /accounts/{account-Id}/balances:
     get:
@@ -328,9 +325,6 @@ paths:
           description: 500 Internal Server Error
           schema:
             $ref: '#/definitions/error'
-      security:
-      - oauth-third-party-providers:
-        - accountDetails
         
   /accounts/{account-Id}/transactions:
     get:
@@ -427,9 +421,6 @@ paths:
           description: 500 Internal Server Error
           schema:
             $ref: '#/definitions/error'
-      security:
-      - oauth-third-party-providers:
-        - accountDetails
  
 
 definitions:
