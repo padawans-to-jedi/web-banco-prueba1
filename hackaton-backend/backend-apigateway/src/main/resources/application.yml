@@ -24,10 +24,4 @@ app:
   jwtSecret: padawansSecretKey
   jwtExpiration: 86400
     
-  oauth2:
-    identification: padawans
-    apiToken: https://api-glbk.liberbank.es/tpps/sb/token
-    username: padawans
-    password: 8au8Yb2XDXaRIo9a
-    clientId: 67d32318-ae50-450e-8b54-1ad2e772576b
-    clientSecret: D4jV1lM0gG2qP8aH5sG5jA7mF5cN8rS2vO4lN7qA8yL6eH1xR6
+  

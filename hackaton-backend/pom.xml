@@ -13,5 +13,6 @@
     <modules>
         <module>backend-apigateway</module>
         <module>backend-mailsender</module>
+		<module>backend-bankapi</module>
     </modules>
 </project>

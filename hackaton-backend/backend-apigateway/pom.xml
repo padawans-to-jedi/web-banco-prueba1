@@ -9,9 +9,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.padawans.hackaton</groupId>
-	<artifactId>hackaton-apigateway</artifactId>
+	<artifactId>hackaton-backend-apigateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hackaton-apigateway</name>
+	<name>backend-apigateway</name>
 	<description>Demo project </description>
 
 	<properties>

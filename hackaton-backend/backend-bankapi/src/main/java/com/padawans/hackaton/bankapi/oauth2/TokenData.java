@@ -1,4 +1,4 @@
-package com.padawans.hackaton.apigateway.oauth2;
+package com.padawans.hackaton.bankapi.oauth2;
 
 import org.springframework.stereotype.Component;
 

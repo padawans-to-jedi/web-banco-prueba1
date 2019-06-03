@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.padawans.hackaton</groupId>
-	<artifactId>hackaton-mailsender</artifactId>
+	<artifactId>hackaton-backend-mailsender</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hackaton-mailsender</name>
+	<name>backend-mailsender</name>
 	<description>Demo project forsend mails</description>
 
 	<properties>
