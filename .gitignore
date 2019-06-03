@@ -59,3 +59,5 @@ blockchain/block-chain/blkchain/geth/chaindata/MANIFEST-000007
 blockchain/block-chain/blkchain/geth/chaindata/LOG
 blockchain/private-chain/chaindata/geth/nodes/MANIFEST-000004
 blockchain/private-chain/chaindata/geth/chaindata/MANIFEST-000007
+/.classpath
+/.project

@@ -1,0 +1,804 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'LiberBank-ApiGateway'
+  description: 'LiberBank-ApiGateway definition'
+security:
+  - OAuth2: [] 
+securityDefinitions:
+      OAuth2:
+        type: oauth2
+        flow: accessCode
+        authorizationUrl: https://example.com/oauth/authorize
+        tokenUrl: https://example.com/oauth/token
+        scopes:
+          private: Total access 
+paths:
+  /login:
+    post:
+      tags: 
+        - Publico
+      summary: Login de usuario.
+      description: Obtener la autorizacion para el usuario.
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      parameters:
+        - name: LoginRequest
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/LoginRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/LoginResponse'
+        default:
+          description: error inesperado
+          schema: 
+            $ref: '#/definitions/ErrorResponse'
+  /registry:
+    post:
+      tags: 
+        - Publico
+      summary: Registrar un nuevo usuario.
+      description: Registrar un nuevo usuario.
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      parameters: 
+        - name: Userdata
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserData'
+      responses:
+        201:
+          description: CREATED
+          schema:
+            $ref: '#/definitions/MessageResponse'
+        default:
+          description: error inesperado
+          schema: 
+            $ref: '#/definitions/ErrorResponse'
+    
+  /users/{userID}/payments:
+    post:
+      tags: 
+        - Privado
+      security:
+        - OAuth2: [private]    
+      summary: Agregar un producto al usuario.
+      description: Agregar un producto al usuario.
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      parameters: 
+        - name: userID
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+          format: int64
+        - name: PaymentRequest
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PaymentsRequest'
+      responses:
+        200:
+          description: OK    
+        default:
+          description: error inesperado
+          schema: 
+            $ref: '#/definitions/ErrorResponse'
+  
+  /users/{userID}:
+    put:
+      security:
+        - OAuth2: [private]
+      tags: 
+        - Privado
+      summary: Modificar datos de Usuario.
+      description: Modificar datos de Usuario.
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+          format: int64
+        - name: Userdata
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserDataUpdate'
+      responses:
+        201:
+          description: CREATED
+          schema:
+            $ref: '#/definitions/MessageResponse'
+  
+  /users/{userID}/accounts:
+    post:
+      tags: 
+        - Privado
+      security:
+        - OAuth2: [private]    
+      summary: Agregar una cuenta al usuario.
+      description: Agregar un cuenta al usuario.
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      parameters: 
+        - name: userID
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+          format: int64
+        - name: AccountRequest
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Accountrequest'
+      responses:
+        201:
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountsResponse'
+    get:
+      tags: 
+        - Privado
+      security:
+        - OAuth2: [private]    
+      summary: Consultar los datos las cuentas de un usuario
+      description: Consultar los datos las cuentas de un usuario
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      parameters: 
+        - name: userID
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountsGetResponse'     
+  
+  /accounts:
+    get:
+      tags:
+      - obtain-account
+      summary: Operation to obtain the accounts of a PSU
+      description: |
+        In this Sandbox version, you can use the following values to force your desired response back:
+
+        |        Case        |         X-Request-Id & queryParams      |
+        | ------------------ | --------------------------------------- |
+        | Status code 400    | 550e8400-e29b-41d4-a716-446655440400    |
+        | Status code 404    | 550e8400-e29b-41d4-a716-446655440404    |
+        | Status code 500    | 550e8400-e29b-41d4-a716-446655440500    |
+        | Valid pagination   | ?count=(.*)&cursor=3yvu1pzhd3i7         |
+        | Valid pagination   | ?cursor=3yvu1pzhd3i7                    |
+
+        > Where (.*) is any value.
+      consumes:
+      - application/json
+      parameters:
+      - name: X-Request-Id
+        in: header
+        type: string
+        format: uuid
+        required: true
+        description: Id of the request, unique to the call, determined by the initiating
+          part
+      - name: count
+        in: query
+        type: string
+        required: false
+        description: Specifies the page size
+      - name: cursor
+        in: query
+        type: string
+        required: false
+        description: Specifies the next page
+      responses:
+        200:
+          description: 200 OK
+          headers:
+            X-Request-Id:
+              type: string
+              format: uuid
+          schema:
+            $ref: '#/definitions/accountsDto'
+        400:
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        401:
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        403:
+          description: 403 Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        404:
+          description: 404 Not Found
+          schema:
+            $ref: '#/definitions/error'
+        405:
+          description: 405 Method Not Allowed
+          schema:
+            $ref: '#/definitions/error'
+        420:
+          description: 420 Method Failure
+          schema:
+            $ref: '#/definitions/error'
+        499:
+          description: 499 Codigo Transformaciones Inexistente
+          schema:
+            $ref: '#/definitions/error'
+        500:
+          description: 500 Internal Server Error
+          schema:
+            $ref: '#/definitions/error'      
+        
+  /accounts/{account-Id}/balances:
+    get:
+      tags:
+      - balances
+      summary: Operation to obtain the balances of an account
+      description: |
+        In this Sandbox version, you can use the following values to force your desired response back:
+
+        |        Case       | account id |
+        | ----------------- | ---------- |
+        | Status code 200   | LBK123     |
+        | Status code 400   | LBK1230    |
+        | Status code 404   | LBK1234    |
+        | Status code 500   | LBK1235    |
+      consumes:
+      - application/json
+      parameters:
+      - name: account-Id
+        in: path
+        type: string
+        required: true
+        description: Id Account
+      - name: X-Request-Id
+        in: header
+        type: string
+        required: true
+        format: uuid
+        description: ID of the request, unique to the call, determined by the initiating
+          party
+      responses:
+        200:
+          description: 200 OK
+          headers:
+            X-Request-Id:
+              type: string
+              format: uuid
+          schema:
+            $ref: '#/definitions/balancesResponseDto'
+        400:
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        401:
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        403:
+          description: 403 Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        404:
+          description: 404 Not Found
+          schema:
+            $ref: '#/definitions/error'
+        405:
+          description: 405 Method Not Allowed
+          schema:
+            $ref: '#/definitions/error'
+        499:
+          description: 499 Codigo Transformaciones Inexistente
+          schema:
+            $ref: '#/definitions/error'
+        500:
+          description: 500 Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+        
+  /accounts/{account-Id}/transactions:
+    get:
+      tags:
+      - transactions
+      summary: Operation to obtain the transactions of an account
+      description: |
+        In this Sandbox version, you can use the following values to force your desired response back:
+
+        |        Case       |     account id & queryParams     |
+        | ----------------- | -------------------------------- |
+        | Status code 200   | LBK123                           |
+        | Status code 400   | LBK1230                          |
+        | Status code 404   | LBK1234                          |
+        | Status code 500   | LBK1235                          |
+        | Valid pagination  | ?count=(.*)&cursor=3yvu1pzhd3i7  |
+        | Valid pagination  | ?cursor=3yvu1pzhd3i7             |
+
+        > Where (.*) is any value.
+      consumes:
+      - application/json
+      parameters:
+      - name: account-Id
+        in: path
+        type: string
+        required: true
+        description: Account Id
+      - name: dateFrom
+        in: query
+        type: string
+        format: date
+        description: Start date to filter transactions
+      - name: dateTo
+        in: query
+        type: string
+        format: date
+        description: End date to filter transactions
+      - name: X-Request-Id
+        in: header
+        type: string
+        format: uuid
+        required: true
+        description: ID of the request, unique to the call, determined by the initiating
+          part
+      - name: count
+        in: query
+        type: string
+        required: false
+        description: Specifies the page size
+      - name: cursor
+        in: query
+        type: string
+        required: false
+        description: Specifies the next page
+      responses:
+        200:
+          description: 200 OK
+          headers:
+            X-Request-ID:
+              type: string
+              format: uuid
+              description: Id of the request, unique to the call, determined by the
+                initiating part
+            Content-Type:
+              type: string
+              description: application/json
+          schema:
+            $ref: '#/definitions/transactionResponseDto'
+        400:
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        401:
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        403:
+          description: 403 Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        404:
+          description: 404 Not Found
+          schema:
+            $ref: '#/definitions/error'
+        405:
+          description: 405 Method Not Allowed
+          schema:
+            $ref: '#/definitions/error'
+        499:
+          description: 499 Codigo Transformaciones Inexistente
+          schema:
+            $ref: '#/definitions/error'
+        500:
+          description: 500 Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+ 
+
+definitions:
+
+  PaymentsRequest:
+    type: object
+    properties:
+      ammount:
+        type: integer
+        format: int64
+      debtorAccount:
+        type: object
+        $ref: '#/definitions/AccountsResponse'
+      transactionFeeIndicator:
+        type: boolean
+      message:
+        type: string
+      remittanceInformationUnstructured:
+        type: string
+  
+  AccountsGetResponse:
+    type: object
+    properties:
+      accounts:
+        type: array
+        items:
+          $ref: '#/definitions/AccountsResponse'
+  
+  Accountrequest:
+    type: object
+    properties:
+      currency:
+        type: string
+        description: Default EUR
+      accountAgent:
+        type: string
+        
+  AccountsResponse:
+    type: object
+    properties:
+      accountAgent: 
+        type: string
+      iban:
+        type: string
+      currency:
+        type: string
+  
+  MessageResponse:
+    type: object
+    properties:
+      timestamp:
+        type: string
+      httpStatus:
+        type: integer
+      reasonPhrase:
+        type: string
+      message:
+        type: string
+      
+  
+  UserData:
+    type: object
+    properties:
+      name:
+        type: string
+        minLength: 3
+      surname:
+        type: string
+        minLength: 3
+      phone:
+        type: string
+        minLength: 9
+        maxLength: 15
+      email:
+        type: string
+        pattern: "^[a-zA-Z0-9-@.]+$"
+        minLength: 6
+        maxLength: 30
+      address:
+        $ref: '#/definitions/Address'
+      password:
+        description: el password debe estar codificado haciendo uso de un sha256.
+        type: string
+        pattern: "[A-Fa-f0-9]{64}"
+        maxLength: 64
+        minLength: 64
+  
+  UserDataUpdate:
+    type: object
+    properties:
+      name:
+        type: string
+        minLength: 3
+      surname:
+        type: string
+        minLength: 3
+      phone:
+        type: string
+        minLength: 9
+        maxLength: 15
+      email:
+        type: string
+        pattern: "^[a-zA-Z0-9-@.]+$"
+        minLength: 6
+        maxLength: 30
+      address:
+        $ref: '#/definitions/Address'
+         
+    
+  
+  LoginRequest:
+    type: object
+    properties:
+      userName:
+        description: email del usuario.
+        type: string
+        pattern: "^[a-zA-Z0-9-@.]+$"
+        minLength: 6
+        maxLength: 30
+      password:
+        description: el password debe estar codificado haciendo uso de un sha256.
+        type: string
+        pattern: "[A-Fa-f0-9]{64}"
+        maxLength: 64
+        minLength: 64
+  
+  LoginResponse:
+    type: object
+    properties:
+      userID:
+        type: integer
+        minimum: 1
+        maximum: 10000
+      name:
+        type: string
+        minLength: 3
+      surname:
+        type: string
+        minLength: 3
+      phone:
+        type: string
+        minLength: 3
+      email:
+        type: string
+        pattern: "^[a-zA-Z0-9-@.]+$"
+        minLength: 6
+        maxLength: 30
+      address:
+        $ref: '#/definitions/Address'
+      bearer:
+        type: string
+  Address:
+    type: object
+    properties:
+      street:
+        type: string
+        minLength: 3
+      country:
+        type: string
+        minLength: 3
+      number:
+        type: string
+        minLength: 1
+      floor:
+        type: string
+        minLength: 1
+      postalCode:
+        type: string
+        minLength: 4
+  
+  Product:
+    type: object
+    properties:
+      productID:
+        type: integer
+        minimum: 1
+        maximum: 10000
+      productName:
+        type: string
+    
+  ErrorResponse:
+    type: object
+    description: Tipo de error ocurrido.
+    properties:
+      mensaje:
+        type: string
+        maxLength: 250
+        pattern: "[^A-Za-z0-9]"
+      tipo:
+        type: string
+        maxLength: 250
+        pattern: "[^A-Za-z0-9]"
+
+  accountsDto:
+    description: List of accounts
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/accountDto'
+      next_cursor:
+        type: string
+    additionalProperties: false
+  accountDto:
+    description: Details of an account
+    type: object
+    required:
+    - resourceId
+    - iban
+    - currency
+    properties:
+      resourceId:
+        type: string
+        maxLength: 35
+        description: Id account
+        example: gdjg9wq1rcr8wer9mcr
+      iban:
+        type: string
+        pattern: ^[A-Z]{2}[0-9]{22}$
+        description: Used for accounts that do not have IBAN
+        example: ES1720480000003400138578
+      currency:
+        type: string
+        pattern: ^[A-Z]{3}$
+        description: ISO 4217 Alpha 3
+        example: EUR
+      product:
+        type: string
+        maxLength: 20
+        description: Product name of the bank for this account
+        example: ACTIVA
+  accountReferenceDto:
+    description: Reference to an account
+    type: object
+    required:
+    - iban
+    properties:
+      iban:
+        type: string
+        pattern: ^[A-Z]{2}[0-9]{2}[0-9]{20}$
+        description: International Bank Account Number
+        example: ES1720480000003400138578
+      currency:
+        type: string
+        pattern: ^[A-Z]{3}$
+        description: Badge in ISO 4217 Alpha 3
+        example: EUR
+  balanceDto:
+    description: Information about a balance
+    type: object
+    required:
+    - amount
+    properties:
+      amount:
+        $ref: '#/definitions/amountDto'
+        description: Amount of the balance
+      lastChangeDateTime:
+        type: string
+        format: date
+        description: Date and time of last change
+        example: "2018-07-24"
+  balancesDto:
+    description: Description of balances shown
+    type: object
+    required:
+    - forwardAvailable
+    properties:
+      closingBooked:
+        $ref: '#/definitions/balanceDto'
+      forwardAvailable:
+        $ref: '#/definitions/balanceDto'
+      retainedBalance:
+        $ref: '#/definitions/balanceDto'
+      openingBooked:
+        $ref: '#/definitions/balanceDto'
+  amountDto:
+    description: Amount of an account
+    type: object
+    required:
+    - currency
+    - amount
+    properties:
+      currency:
+        type: string
+        pattern: ^[A-Z]{3}$
+        description: ISO 4217 Alpha 3
+        example: EUR
+      amount:
+        type: number
+        format: decimal
+        description: Quantity with fractional digits. Negative quantities begin with
+          the minus sign '-'. The decimal point separator is a point'.'
+  balancesResponseDto:
+    description: Balance associated with an account
+    type: object
+    required:
+    - balances
+    properties:
+      account:
+        $ref: '#/definitions/accountReferenceDto'
+      balances:
+        $ref: '#/definitions/balancesDto'
+  transactionDto:
+    description: Information of a transaction
+    type: object
+    required:
+    - transactionId
+    - amount
+    properties:
+      transactionId:
+        type: string
+        maxLength: 9
+        description: Transaction Id
+        example: nfdd829qwafzx38tj9304
+      entryReference:
+        type: string
+        maxLength: 14
+        description: Transaction reference
+        example: asdafw23
+      bookingDate:
+        type: string
+        format: date
+        description: Date on which an entry is registered in the bank
+        example: "2017-09-21"
+      amount:
+        $ref: '#/definitions/amountDto'
+      balances:
+        $ref: '#/definitions/balancesDto'
+  transactionResponseDto:
+    description: Transaction associated with an account
+    type: object
+    properties:
+      account:
+        $ref: '#/definitions/accountReferenceDto'
+        description: Account identifier
+      transactions:
+        description: Transactions processed
+        type: object
+        required:
+        - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/transactionDto'
+          next_cursor:
+            type: string
+  error:
+    description: Common error response scheme
+    type: object
+    properties:
+      error:
+        type: array
+        items:
+          $ref: '#/definitions/errorItem'
+      httpCode:
+        type: string
+      httpMessage:
+        type: string
+      moreInformation:
+        type: string
+    additionalProperties: false
+  errorItem:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      field:
+        type: string
+    additionalProperties: false
+
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /pedrodlf/LiberBank-ApiGateway/1.0
+schemes:
+ - https

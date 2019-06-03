@@ -1,0 +1,33 @@
+#Server 
+server:
+  port: 8080
+#Constanst
+database: db
+host: 192.168.99.100:3306  
+
+#JPA
+spring:
+  jpa: 
+    generate-ddl: true
+    show-sql: false
+    properties: 
+      hibernate: 
+        format_sql : true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource: 
+    url: jdbc:mysql://${host}/${database}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT
+    username: root
+    password: password  
+    
+# App Properties
+app: 
+  jwtSecret: padawansSecretKey
+  jwtExpiration: 86400
+    
+  oauth2:
+    identification: padawans
+    apiToken: https://api-glbk.liberbank.es/tpps/sb/token
+    username: padawans
+    password: 8au8Yb2XDXaRIo9a
+    clientId: 67d32318-ae50-450e-8b54-1ad2e772576b
+    clientSecret: D4jV1lM0gG2qP8aH5sG5jA7mF5cN8rS2vO4lN7qA8yL6eH1xR6
