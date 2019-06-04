@@ -1,6 +1,6 @@
 export class Cuenta {
     constructor(
-      public data: Data
+      public data: Data[]
     ) {
 
     }

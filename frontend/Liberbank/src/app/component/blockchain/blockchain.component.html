@@ -6,8 +6,8 @@
             <img src="../../../assets/img/ethereum.svg" class="ethereum">
         </div>
 
-        <form>
-            <input type="text" placeholder="Introduce tu identificador de transacción">
+        <form #registerForm="ngForm" (ngSubmit)="consultarHash()" >
+            <input type="text" name="hash" #hash="ngModel" [(ngModel)]="idTransaccion.hash" placeholder="Introduce tu identificador de transacción">
             <button type="submit" class="btn btn-info">Consultar</button>
         </form>
     </div>

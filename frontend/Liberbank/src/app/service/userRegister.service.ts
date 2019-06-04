@@ -6,6 +6,7 @@ import { UserRegistre } from '../model/userRegistre';
 import { Login } from '../model/login';
 import { User } from '../model/user';
 import { Cuenta } from '../model/cuenta';
+import { Hash } from '../model/hash';
 
 import { GLOBAL } from '../model/Global';
 
@@ -66,9 +67,13 @@ export class UserRegistreService {
         return this._http.put(this.url + 'users/'+  user.userID, json, {headers: headers})
     }
 
+    consultHash( idTransaccion: Hash) {
 
-    getAccount() {
+      let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+ this.apiUser.bearer);
+
+      return this._http.get(this.url + 'transactions/'+  idTransaccion.hash, {headers: headers})
 
     }
+
 
 }
