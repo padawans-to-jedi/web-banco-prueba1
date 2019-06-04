@@ -23,18 +23,52 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PaymentResponse'
+  
+  /transactions/{transactionHash}:
+    get:
+      summary: Obtener los datos de la transaccion registrados en la blockchain.
+      description: Obtener los datos de la transaccion registrados en la blockchain.
+      parameters: 
+        - name: transactionHash
+          in: path
+          required: true
+          type: string
+          minLength: 60
+          maxLength: 70
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TransactionResponse'
+    
           
 definitions:
+
+  TransactionResponse:
+    type: object
+    properties:
+      debitorID:
+        type: integer
+        format: int64
+        minimum: 1
+      amount:
+        type: integer
+        format: int64
+        minimum: 1
+      creditorID:
+        type: integer
+        minimum: 1
+      paymentID:
+        type: integer
+        minimum: 1
+
   PaymentRequest:
     type: object
     properties:
-      userID:
+      debitorID:
         type: integer
         format: int64
-      orderID:
-        type: integer
-        format: int64
-      paymentType:
+      creditorID:
         type: integer
         format: int64
       amount:
