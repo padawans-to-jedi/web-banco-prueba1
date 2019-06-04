@@ -34,9 +34,9 @@ public class AccountServiceImpl implements AccountService {
     public ResponseEntity<BalancesResponse> accountsAccountIdBalancesGet(String accountId, UUID xRequestId) {
         HttpHeaders headers = getLiberbankHeaderForAccountsBalances(xRequestId);
 
-        String url = "https://api-glbk.liberbank.es/tpps/sb/psd2/v1.0/accounts/" + accountId + " /balances";
+        String url = "https://api-glbk.liberbank.es/tpps/sb/psd2/v1.0/accounts/";
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url).path(accountId).path("/balances");
 
         URI uri = builder.build().toUri();
 

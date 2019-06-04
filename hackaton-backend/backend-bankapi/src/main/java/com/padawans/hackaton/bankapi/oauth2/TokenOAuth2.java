@@ -41,18 +41,18 @@ public class TokenOAuth2 {
     }
 
     public String getAccessTokenFromLiberbankForAccount() {
-        return getTokenByScope("accountsList");
+        return getTokenByScope("accountsList", getHeadersAccounts());
     }
 
     public String getAccessTokenFromLiberbankForAccountBalances() {
-        return getTokenByScope("accountDetails");
+        return getTokenByScope("accountDetails", getHeadersBalances());
     }
 
     public String getAccessTokenFromLiberbankForAccountTransactions() {
-        return getTokenByScope("accountDetails");
+        return getTokenByScope("accountDetails", getHeadersTransactions());
     }
 
-    private String getTokenByScope(String scope) {
+    private String getTokenByScope(String scope, HttpHeaders headers) {
         RestTemplate restTemplate;
         HttpEntity<MultiValueMap<String, String>> request;
         ResponseEntity<AccessTokenResponse> response = null;
@@ -65,7 +65,7 @@ public class TokenOAuth2 {
         map.add("client_secret", clientSecret);
         map.add("scope", scope);
 
-        request = new HttpEntity<>(map, getHeaders());
+        request = new HttpEntity<>(map, headers);
 
         String uri = UriComponentsBuilder.fromHttpUrl(apiUrlToken).toUriString();
 
@@ -84,10 +84,24 @@ public class TokenOAuth2 {
         return accessTokenFromLiberbank;
     }
 
-    private HttpHeaders getHeaders() {
+    private HttpHeaders getHeadersAccounts() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Accept", "application/json");
         headers.add("Content-Type", "application/x-www-form-urlencoded");
+
+        return headers;
+    }
+
+    private HttpHeaders getHeadersBalances() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Accept", "application/json");
+
+        return headers;
+    }
+
+    private HttpHeaders getHeadersTransactions() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Accept", "application/json");
 
         return headers;
     }
