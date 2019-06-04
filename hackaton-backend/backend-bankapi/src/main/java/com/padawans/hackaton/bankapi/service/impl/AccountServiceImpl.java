@@ -31,37 +31,6 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     LiberbankOauth2Properties properties;
 
-    public ResponseEntity<BalancesResponse> accountsAccountIdBalancesGet(String accountId, UUID xRequestId) {
-        HttpHeaders headers = getLiberbankHeaderForAccountsBalances(xRequestId);
-
-        String url = "https://api-glbk.liberbank.es/tpps/sb/psd2/v1.0/accounts/";
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url).path(accountId).path("/balances");
-
-        URI uri = builder.build().toUri();
-
-        RequestEntity<BalancesResponse> request = new RequestEntity<>(headers, HttpMethod.GET, uri);
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        ResponseEntity<BalancesResponse> response = null;
-
-        try {
-            response = restTemplate.exchange(uri, HttpMethod.GET, request, BalancesResponse.class);
-        } catch (final HttpClientErrorException e) {
-            log.info(e.getStatusCode().toString());
-            log.info(e.getResponseBodyAsString());
-        }
-
-        return response;
-    }
-
-    public ResponseEntity<TransactionResponse> accountsAccountIdTransactionsGet(String accountId, UUID xRequestId,
-            Date dateFrom, Date dateTo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     public ResponseEntity<AccountsResponse> accountsGet(UUID xRequestId) {
         HttpHeaders headers = getLiberbankHeaderForAccounts(xRequestId);
 
@@ -93,6 +62,67 @@ public class AccountServiceImpl implements AccountService {
         return response;
     }
 
+    public ResponseEntity<BalancesResponse> accountsAccountIdBalancesGet(String accountId, UUID xRequestId) {
+        HttpHeaders headers = getLiberbankHeaderForAccountBalances(xRequestId);
+
+        String url = "https://api-glbk.liberbank.es/tpps/sb/psd2/v1.0/accounts/";
+
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url).path(accountId).path("/balances");
+
+        URI uri = builder.build().toUri();
+
+        RequestEntity<BalancesResponse> request = new RequestEntity<>(headers, HttpMethod.GET, uri);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<BalancesResponse> response = null;
+
+        try {
+            response = restTemplate.exchange(uri, HttpMethod.GET, request, BalancesResponse.class);
+        } catch (final HttpClientErrorException e) {
+            log.info(e.getStatusCode().toString());
+            log.info(e.getResponseBodyAsString());
+        }
+
+        return response;
+    }
+
+    public ResponseEntity<TransactionResponse> accountsAccountIdTransactionsGet(String accountId, UUID xRequestId,
+            Date dateFrom, Date dateTo) {
+        HttpHeaders headers = getLiberbankHeaderForAccountTransactions(xRequestId);
+
+        String url = "https://api-glbk.liberbank.es/tpps/sb/psd2/v1.0/accounts/";
+
+        // DateFormat dateFormat = new SimpleDateFormat("dd-/mm/aaaa");
+
+        // No funciona con parámetros opcionales
+        // MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        // map.add("dateFrom", dateFormat.format(dateFrom));
+        // map.add("dateTo", dateFormat.format(dateTo));
+        //
+        // UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url).path(accountId).path("/transactions")
+        // .queryParams(map);
+
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url).path(accountId).path("/transactions");
+
+        URI uri = builder.build().toUri();
+
+        RequestEntity<TransactionResponse> request = new RequestEntity<>(headers, HttpMethod.GET, uri);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<TransactionResponse> response = null;
+
+        try {
+            response = restTemplate.exchange(uri, HttpMethod.GET, request, TransactionResponse.class);
+        } catch (final HttpClientErrorException e) {
+            log.info(e.getStatusCode().toString());
+            log.info(e.getResponseBodyAsString());
+        }
+
+        return response;
+    }
+
     private HttpHeaders getLiberbankHeaderForAccounts(UUID xRequestId) {
         TokenData tokenData = new TokenData(properties);
 
@@ -106,7 +136,7 @@ public class AccountServiceImpl implements AccountService {
         return headers;
     }
 
-    private HttpHeaders getLiberbankHeaderForAccountsBalances(UUID xRequestId) {
+    private HttpHeaders getLiberbankHeaderForAccountBalances(UUID xRequestId) {
         TokenData tokenData = new TokenData(properties);
 
         TokenOAuth2 tokenGenerator = new TokenOAuth2(tokenData);
@@ -116,6 +146,20 @@ public class AccountServiceImpl implements AccountService {
         headers.add("x-request-id", xRequestId.toString());
         headers.add(HttpHeaders.AUTHORIZATION,
                 "Bearer " + tokenGenerator.getAccessTokenFromLiberbankForAccountBalances());
+
+        return headers;
+    }
+
+    private HttpHeaders getLiberbankHeaderForAccountTransactions(UUID xRequestId) {
+        TokenData tokenData = new TokenData(properties);
+
+        TokenOAuth2 tokenGenerator = new TokenOAuth2(tokenData);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("accept", "application/json");
+        headers.add("x-request-id", xRequestId.toString());
+        headers.add(HttpHeaders.AUTHORIZATION,
+                "Bearer " + tokenGenerator.getAccessTokenFromLiberbankForAccountTransactions());
 
         return headers;
     }

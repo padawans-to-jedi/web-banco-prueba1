@@ -30,8 +30,7 @@ public class AccountsController implements AccountsApi {
     @Override
     public ResponseEntity<TransactionResponse> accountsAccountIdTransactionsGet(String accountId, UUID xRequestId,
             Date dateFrom, Date dateTo, String count, String cursor) {
-        // TODO Auto-generated method stub
-        return null;
+        return accountService.accountsAccountIdTransactionsGet(accountId, xRequestId, dateFrom, dateTo);
     }
 
     @Override
