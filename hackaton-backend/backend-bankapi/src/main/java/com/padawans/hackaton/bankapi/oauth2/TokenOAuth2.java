@@ -1,6 +1,5 @@
 package com.padawans.hackaton.bankapi.oauth2;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,97 +15,80 @@ import com.padawans.hackaton.bankapi.generated.model.AccessTokenResponse;
 
 import lombok.extern.log4j.Log4j2;
 
-@Component
 @Log4j2
+@Component
 public class TokenOAuth2 {
 
-	@Value("${app.oauth2.api.identification}")
-	String identification;
+    String identification;
 
-	@Value("${app.oauth2.api.token}")
-	String apiToken;
+    String apiUrlToken;
 
-	@Value("${app.oauth2.api.username}")
-	String username;
+    String username;
 
-	@Value("${app.oauth2.api.password}")
-	String password;
+    String password;
 
-	@Value("${app.oauth2.api.clientId}")
-	String clientId;
+    String clientId;
 
-	@Value("${app.oauth2.api.clientSecret}")
-	String clientSecret;
+    String clientSecret;
 
-	public TokenOAuth2(TokenData tokenData) {
-		this.identification = tokenData.getIdentification();
-		this.apiToken = tokenData.getApiToken();
-		this.username = tokenData.getUsername();
-		this.password = tokenData.getPassword();
-		this.clientId = tokenData.getClientId();
-		this.clientSecret = tokenData.getClientSecret();
-	}
+    public TokenOAuth2(TokenData tokenData) {
+        this.identification = tokenData.getIdentification();
+        this.apiUrlToken = tokenData.getApiToken();
+        this.username = tokenData.getUsername();
+        this.password = tokenData.getPassword();
+        this.clientId = tokenData.getClientId();
+        this.clientSecret = tokenData.getClientSecret();
+    }
 
-	public String getAccessTokenFromLiberbankForAccounts() {
-		// ResourceOwnerPasswordResourceDetails resourceDetails = new
-		// ResourceOwnerPasswordResourceDetails();
-		//
-		// resourceDetails.setId(identification);
-		// resourceDetails.setAccessTokenUri(apiToken);
-		// resourceDetails.setClientId(clientId);
-		// resourceDetails.setClientSecret(clientSecret);
-		//
-		// resourceDetails.setGrantType("client_credentials");
-		// resourceDetails.setScope(Arrays.asList("accountsList"));
-		//
-		// AccessTokenRequest atr = new DefaultAccessTokenRequest();
-		// DefaultOAuth2ClientContext clientContext = new
-		// DefaultOAuth2ClientContext(atr);
-		//
-		// OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(resourceDetails,
-		// clientContext);
-		// restTemplate.setMessageConverters(Arrays.asList(new
-		// MappingJackson2HttpMessageConverter()));
-		// String accessTokenFromLiberbank = restTemplate.getAccessToken().getValue();
-		RestTemplate restTemplate;
-		HttpEntity<MultiValueMap<String, String>> request;
-		ResponseEntity<AccessTokenResponse> response = null;
-		String accessTokenFromLiberbank = null;
+    public String getAccessTokenFromLiberbankForAccount() {
+        return getTokenByScope("accountsList");
+    }
 
-		restTemplate = new RestTemplate();
-		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-		map.add("grant_type", "client_credentials");
-		map.add("client_id", clientId);
-		map.add("client_secret", clientSecret);
-		map.add("scope", "accountsList");
+    public String getAccessTokenFromLiberbankForAccountBalances() {
+        return getTokenByScope("accountDetails");
+    }
 
-		request = new HttpEntity<>(map, getHeaders());
+    public String getAccessTokenFromLiberbankForAccountTransactions() {
+        return getTokenByScope("accountDetails");
+    }
 
-		String url = apiToken;
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+    private String getTokenByScope(String scope) {
+        RestTemplate restTemplate;
+        HttpEntity<MultiValueMap<String, String>> request;
+        ResponseEntity<AccessTokenResponse> response = null;
+        String accessTokenFromLiberbank = null;
 
-		String uri = builder.toUriString();
+        restTemplate = new RestTemplate();
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.add("grant_type", "client_credentials");
+        map.add("client_id", clientId);
+        map.add("client_secret", clientSecret);
+        map.add("scope", scope);
 
-		try {
-			response = restTemplate.postForEntity(uri, request, AccessTokenResponse.class);
-		} catch (final HttpClientErrorException e) {
-			log.info(e.getStatusCode().toString());
-			log.info(e.getResponseBodyAsString());
-		}
+        request = new HttpEntity<>(map, getHeaders());
 
-		if (response != null && response.getStatusCode() == HttpStatus.OK) {
-			accessTokenFromLiberbank = response.getBody().getAccessToken();
-		}
+        String uri = UriComponentsBuilder.fromHttpUrl(apiUrlToken).toUriString();
 
-		log.debug("Access-Token from OAuth2 Padawans Liberbank: {}", accessTokenFromLiberbank);
-		return accessTokenFromLiberbank;
-	}
+        try {
+            response = restTemplate.postForEntity(uri, request, AccessTokenResponse.class);
+        } catch (final HttpClientErrorException e) {
+            log.info(e.getStatusCode().toString());
+            log.info(e.getResponseBodyAsString());
+        }
 
-	private HttpHeaders getHeaders() {
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Accept", "application/json");
-		headers.add("Content-Type", "application/x-www-form-urlencoded");
+        if (response != null && response.getStatusCode() == HttpStatus.OK) {
+            accessTokenFromLiberbank = response.getBody().getAccessToken();
+        }
 
-		return headers;
-	}
+        log.debug("Access-Token from OAuth2 Padawans Liberbank: {}", accessTokenFromLiberbank);
+        return accessTokenFromLiberbank;
+    }
+
+    private HttpHeaders getHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Accept", "application/json");
+        headers.add("Content-Type", "application/x-www-form-urlencoded");
+
+        return headers;
+    }
 }

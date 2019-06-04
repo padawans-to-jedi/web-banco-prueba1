@@ -24,8 +24,7 @@ public class AccountsController implements AccountsApi {
 
     @Override
     public ResponseEntity<BalancesResponse> accountsAccountIdBalancesGet(String accountId, UUID xRequestId) {
-        // TODO Auto-generated method stub
-        return null;
+        return accountService.accountsAccountIdBalancesGet(accountId, xRequestId);
     }
 
     @Override
@@ -37,7 +36,6 @@ public class AccountsController implements AccountsApi {
 
     @Override
     public ResponseEntity<AccountsResponse> accountsGet(UUID xRequestId) {
-        // TODO Auto-generated method stub
         return accountService.accountsGet(xRequestId);
     }
 
