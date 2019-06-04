@@ -59,3 +59,10 @@ blockchain/block-chain/blkchain/geth/chaindata/MANIFEST-000007
 blockchain/block-chain/blkchain/geth/chaindata/LOG
 blockchain/private-chain/chaindata/geth/nodes/MANIFEST-000004
 blockchain/private-chain/chaindata/geth/chaindata/MANIFEST-000007
+blockchain/Node1/geth/chaindata/LOCK
+blockchain/Node1/geth/chaindata/LOG
+blockchain/Node1/geth/chaindata/MANIFEST-000017
+blockchain/Node1/geth/LOCK
+blockchain/Node1/geth/nodes/LOCK
+blockchain/Node1/geth/nodes/LOG
+blockchain/Node1/geth/nodes/MANIFEST-000007
