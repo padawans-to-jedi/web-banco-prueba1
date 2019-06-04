@@ -167,11 +167,47 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/AccountsGetResponse'     
-  
+
+  /transactions/{transactionHash}:
+    get:
+      tags: 
+        - Privado
+      security:
+        - OAuth2: [private]    
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      summary: Obtener los datos de la transaccion registrados en la blockchain.
+      description: Obtener los datos de la transaccion registrados en la blockchain.
+      parameters: 
+        - name: transactionHash
+          in: path
+          required: true
+          type: string
+          minLength: 60
+          maxLength: 70
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TransactionResponse'  
  
 
 definitions:
-
+  
+  TransactionResponse:
+    type: object
+    properties:
+      debitor:
+        $ref: '#/definitions/User'
+      creditor:
+        $ref: '#/definitions/User'
+      ammount:
+        type: integer
+        format: int64
+        
+  
   PaymentsRequest:
     type: object
     properties:
@@ -226,7 +262,17 @@ definitions:
         type: string
       message:
         type: string
-      
+  
+  User:
+   type: object
+   properties:
+      name:
+        type: string
+        minLength: 3
+      surname:
+        type: string
+        minLength: 3
+    
   
   UserData:
     type: object

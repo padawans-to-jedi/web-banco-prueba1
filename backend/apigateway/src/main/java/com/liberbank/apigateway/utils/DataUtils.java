@@ -2,6 +2,7 @@ package com.liberbank.apigateway.utils;
 
 import com.example.generated.model.Address;
 import com.example.generated.model.LoginResponse;
+import com.example.generated.model.User;
 import com.liberbank.apigateway.dao.AddressDAO;
 import com.liberbank.apigateway.dao.UserDAO;
 
@@ -32,5 +33,12 @@ public class DataUtils {
 		result.setStreet(address.getStreet());
 		result.setPostalCode(address.getPostalCode());
 		return result;
+	}
+	
+	public static User userDAOToUser(UserDAO dao) {
+		User user = new User();
+		user.setName(dao.getName());
+		user.setSurname(dao.getSurname());
+		return user;
 	}
 }

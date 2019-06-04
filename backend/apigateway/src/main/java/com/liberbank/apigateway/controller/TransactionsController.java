@@ -1,4 +1,4 @@
-package com.padawans.wrapper.controller;
+package com.liberbank.apigateway.controller;
 
 import javax.validation.constraints.Size;
 
@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.generated.api.TransactionsApi;
 import com.example.generated.model.TransactionResponse;
-import com.padawans.wrapper.service.TransactionsService;
+import com.liberbank.apigateway.service.TransactionsService;
+
 
 @Controller
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET})
-public class TransactionsController implements TransactionsApi{
+public class TransactionsController implements TransactionsApi {
 
 	@Autowired
 	TransactionsService service;
