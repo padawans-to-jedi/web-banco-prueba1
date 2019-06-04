@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Open';
+  src: url('../../../assets/font/OpenSans-Light.ttf');
+}
+
+span {
+  font-size: 20px;
+    margin-left: 17px;
+  font-family: 'Open';
+}
+
+.container-fluid {
+  margin-top: 19px;
+}

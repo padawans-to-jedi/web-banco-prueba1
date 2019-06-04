@@ -21,6 +21,16 @@ body {
     border-color: #00A38D;
 }
 
+.btn-secondary.dropdown-toggle {
+    background-color: #00A38D !important;
+    border-color: #00A38D !important;
+    font-family: 'Open';
+}
+
+.dropdown-menu {
+  font-family: 'Open';
+}
+
 .boton-acceso {
     color: #00A38D;
     text-decoration: none;
@@ -41,6 +51,7 @@ body {
     text-decoration: none;
     font-weight: bold;
     font-size: 15px;
+
 }
 
 .boton-login:hover {
@@ -50,32 +61,42 @@ body {
     font-size: 16px;
 }
 
+@font-face {
+  font-family: 'Open';
+  src: url('../assets/font/OpenSans-Light.ttf');
+}
+
 .boton-logout {
     color: #00A38D;
     text-decoration: none;
     font-weight: bold;
+    margin-left: 14%;
+    font-family: 'Open';
 }
 
 .btn-outline-warning {
     margin-left: 7px !important;
     padding: 2px !important;
     margin-top: 5px !important;
+    font-family: 'Open';
 }
 
 .parrafoIdentidad {
     margin-top: 10px;
+    font-family: 'Open';
 }
 
-.dropdown-toggle {
+/* .dropdown-toggle {
     margin-left: 827px;
-}
+} */
 
-.dropdown-menu {
+/* .dropdown-menu {
     margin-left: 814px;
-}
+} */
 
 .dropdown-menu .btn-outline-warning {
     margin-left: 25px !important;
+    font-family: 'Open';
 }
 
 
@@ -91,6 +112,7 @@ body {
     color: #721c24;
     padding: 0px 133px;
     margin-left: 1px;
+    font-family: 'Open';
 }
 
 .alert-name-email {
@@ -103,6 +125,7 @@ body {
     color: #721c24;
     padding: 0px 95px;
     margin-left: 1px;
+    font-family: 'Open';
 }
 
 .alert-name-country {
@@ -114,6 +137,7 @@ body {
     background: #f8d7da;
     color: #721c24;
     margin-left: 1px;
+    font-family: 'Open';
 }
 
 .alert-name-street {
@@ -126,6 +150,7 @@ body {
     color: #721c24;
     padding: 0px 14px;
     margin-left: 1px;
+    font-family: 'Open';
 }
 
 .contenedor img {
@@ -135,6 +160,7 @@ body {
     top: 57px;
     width: 100%;
 }
+
 
 
 /* BOTON SOBRE IMAGEN DE FONDO */

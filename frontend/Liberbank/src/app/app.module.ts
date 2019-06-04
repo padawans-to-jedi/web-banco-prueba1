@@ -9,7 +9,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { DatosPersonalesComponent } from './component/datos-personales/datos-personales.component';
 import { BlockchainComponent } from './component/blockchain/blockchain.component';
-import { TransaccionesComponent } from './component/transacciones/transacciones.component'; 
+import { TransaccionesComponent } from './component/transacciones/transacciones.component';
+import { CuentaComponent } from './component/cuenta/cuenta.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TransaccionesComponent } from './component/transacciones/transacciones.
     LoginComponent,
     DatosPersonalesComponent,
     BlockchainComponent,
-    TransaccionesComponent
+    TransaccionesComponent,
+    CuentaComponent
   ],
   imports: [
     BrowserModule,

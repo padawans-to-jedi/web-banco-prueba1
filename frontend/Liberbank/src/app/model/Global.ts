@@ -1,3 +1,3 @@
 export var GLOBAL = {
-    url: "http://88a7308f.ngrok.io/"
+    url: "http://5645cde5.ngrok.io/"
 }

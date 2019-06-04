@@ -4,7 +4,7 @@ body {
 
 @font-face {
     font-family: 'Open';
-    src: url('../../../assets/font/Open.ttf');
+    src: url('../../../assets/font/OpenSans-Light.ttf');
 }
 
 .contenedor img {
@@ -12,7 +12,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    margin-top: -53px;
+    margin-top: 0px;
     margin-left: -8px;
     font-family: 'Open';
 }
@@ -20,7 +20,7 @@ body {
 .contenedor-pequeno {
     height: 81%;
     position: absolute;
-    top: 48%;
+    top: 55%;
     left: 50%;
     border-radius: 15px;
     -webkit-transform: translate(-50%, -50%);
@@ -31,7 +31,7 @@ body {
 }
 
 input {
-    margin-left: 3%;
+    margin-left: 5%;
     width: 91%;
     border-radius: 9px;
     padding: 7px;
