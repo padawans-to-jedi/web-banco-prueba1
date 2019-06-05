@@ -19,90 +19,95 @@ import lombok.extern.log4j.Log4j2;
 @Component
 public class TokenOAuth2 {
 
-    String identification;
+	String identification;
 
-    String apiUrlToken;
+	String apiUrlToken;
 
-    String username;
+	String username;
 
-    String password;
+	String password;
 
-    String clientId;
+	String clientId;
 
-    String clientSecret;
+	String clientSecret;
 
-    public TokenOAuth2(TokenData tokenData) {
-        this.identification = tokenData.getIdentification();
-        this.apiUrlToken = tokenData.getApiToken();
-        this.username = tokenData.getUsername();
-        this.password = tokenData.getPassword();
-        this.clientId = tokenData.getClientId();
-        this.clientSecret = tokenData.getClientSecret();
-    }
+	public TokenOAuth2(TokenData tokenData) {
+		this.identification = tokenData.getIdentification();
+		this.apiUrlToken = tokenData.getApiToken();
+		this.username = tokenData.getUsername();
+		this.password = tokenData.getPassword();
+		this.clientId = tokenData.getClientId();
+		this.clientSecret = tokenData.getClientSecret();
+	}
 
-    public String getAccessTokenFromLiberbankForAccount() {
-        return getTokenByScope("accountsList", getHeadersAccounts());
-    }
+	public String getAccessTokenFromLiberbankForAccount() {
+		return getTokenByScope("accountsList", getHeadersAccounts());
+	}
 
-    public String getAccessTokenFromLiberbankForAccountBalances() {
-        return getTokenByScope("accountDetails", getHeadersBalances());
-    }
+	public String getAccessTokenFromLiberbankForAccountBalances() {
+		return getTokenByScope("accountDetails", getHeadersBalances());
+	}
 
-    public String getAccessTokenFromLiberbankForAccountTransactions() {
-        return getTokenByScope("accountDetails", getHeadersTransactions());
-    }
+	public String getAccessTokenFromLiberbankForAccountTransactions() {
+		return getTokenByScope("accountDetails", getHeadersTransactions());
+	}
 
-    private String getTokenByScope(String scope, HttpHeaders headers) {
-        RestTemplate restTemplate;
-        HttpEntity<MultiValueMap<String, String>> request;
-        ResponseEntity<AccessTokenResponse> response = null;
-        String accessTokenFromLiberbank = null;
+	public String getAccessTokenFromLiberbankForPayments() {
+		return getTokenByScope("paymentsOrder", getHeadersTransactions());
+	}
 
-        restTemplate = new RestTemplate();
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("grant_type", "client_credentials");
-        map.add("client_id", clientId);
-        map.add("client_secret", clientSecret);
-        map.add("scope", scope);
+	private String getTokenByScope(String scope, HttpHeaders headers) {
+		RestTemplate restTemplate;
+		HttpEntity<MultiValueMap<String, String>> request;
+		ResponseEntity<AccessTokenResponse> response = null;
+		String accessTokenFromLiberbank = null;
 
-        request = new HttpEntity<>(map, headers);
+		restTemplate = new RestTemplate();
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+		map.add("grant_type", "client_credentials");
+		map.add("client_id", clientId);
+		map.add("client_secret", clientSecret);
+		map.add("scope", scope);
 
-        String uri = UriComponentsBuilder.fromHttpUrl(apiUrlToken).toUriString();
+		request = new HttpEntity<>(map, headers);
 
-        try {
-            response = restTemplate.postForEntity(uri, request, AccessTokenResponse.class);
-        } catch (final HttpClientErrorException e) {
-            log.info(e.getStatusCode().toString());
-            log.info(e.getResponseBodyAsString());
-        }
+		String uri = UriComponentsBuilder.fromHttpUrl(apiUrlToken).toUriString();
 
-        if (response != null && response.getStatusCode() == HttpStatus.OK) {
-            accessTokenFromLiberbank = response.getBody().getAccessToken();
-        }
+		try {
+			response = restTemplate.postForEntity(uri, request, AccessTokenResponse.class);
+		} catch (final HttpClientErrorException e) {
+			log.info(e.getStatusCode().toString());
+			log.info(e.getResponseBodyAsString());
+		}
 
-        log.debug("Access-Token from OAuth2 Padawans Liberbank: {}", accessTokenFromLiberbank);
-        return accessTokenFromLiberbank;
-    }
+		if (response != null && response.getStatusCode() == HttpStatus.OK) {
+			accessTokenFromLiberbank = response.getBody().getAccessToken();
+		}
 
-    private HttpHeaders getHeadersAccounts() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Accept", "application/json");
-        headers.add("Content-Type", "application/x-www-form-urlencoded");
+		log.debug("Access-Token from OAuth2 Padawans Liberbank: {}", accessTokenFromLiberbank);
+		return accessTokenFromLiberbank;
+	}
 
-        return headers;
-    }
+	private HttpHeaders getHeadersAccounts() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Accept", "application/json");
+		headers.add("Content-Type", "application/x-www-form-urlencoded");
 
-    private HttpHeaders getHeadersBalances() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Accept", "application/json");
+		return headers;
+	}
 
-        return headers;
-    }
+	private HttpHeaders getHeadersBalances() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Accept", "application/json");
 
-    private HttpHeaders getHeadersTransactions() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Accept", "application/json");
+		return headers;
+	}
 
-        return headers;
-    }
+	private HttpHeaders getHeadersTransactions() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Accept", "application/json");
+
+		return headers;
+	}
+
 }

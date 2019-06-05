@@ -4,6 +4,8 @@ info:
   title: 'LiberBank-ApiGateway'
   description: 'LiberBank-ApiGateway definition'
 
+paths: {}
+
 definitions:
 
   ErrorResponse:
@@ -202,4 +204,188 @@ definitions:
         type: string
     additionalProperties: false
 
-  
+  body:
+    type: object
+    required:
+    - account
+    - instructedAmount
+    properties:
+      cardNumber:
+        type: string
+        description: Card number, must be sent if is available
+      account:
+        $ref: '#/definitions/acountReference'
+      payee:
+        type: string
+        maxLength: 70
+        description: Commerce that accept the card
+        example: John Marshall
+      instructedAmount:
+        $ref: '#/definitions/amount'
+  acountReference:
+    type: object
+    properties:
+      iban:
+        type: string
+        pattern: ^[A-Z]{2}[0-9]{2}[0-9]{20}$
+        description: International Bank Account Number
+        example: ES6220480000293400138578
+      currency:
+        type: string
+        pattern: ^[A-Z]{3}$
+        description: Badge in ISO 4217 Alpha 3
+        example: EUR
+  amount:
+    type: object
+    required:
+    - currency
+    - amount
+    properties:
+      currency:
+        type: string
+        pattern: ^[A-Z]{3}$
+        description: Badge in ISO 4217 Alpha 3
+        example: EUR
+      amount:
+        type: number
+        description: Quantity with fractional digits. Negative quantities begin with
+          the minus sign '-'. The decimal point separator is a point '.'
+        example: 1000
+        
+  paymentsInitiationDto:
+    description: List of transactions
+    type: array
+    items:
+      $ref: '#/definitions/paymentInitiationRequestDto'
+    additionalProperties: false
+  bulkPaymentsDto:
+    description: List of transactions
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/paymentDto'
+      next_cursor:
+        type: string
+    additionalProperties: false
+    
+    paymentInitiationDto:
+    type: object
+    required:
+    - transactionStatus
+    - paymentId
+    properties:
+      transactionStatus:
+        type: string
+        enum:
+        - ACCP
+        - ACSC
+        - ACSP
+        - ACTC
+        - ACWC
+        - ACWP
+        - RCVD
+        - PDNG
+        - RJCT
+        description: Transaction Status
+        example: ACCP
+      paymentId:
+        type: string
+        description: Id of the created payment
+        example: IDPAYMENT
+      transactionFees:
+        $ref: '#/definitions/amountDto'
+        description: Costs derived from the transaction
+      transactionFeeIndicator:
+        type: boolean
+        description: If it is 'true', the transaction carries some cost, indicated
+          above. If it is 'false', the transaction does not incur any additional cost
+          to the PSU
+        example: true
+      psuMessage:
+        type: string
+        description: Text to be shown to the PSU
+      scaOauth:
+        type: string
+        description: Several links recognizable by the TPP, for redirection in the
+          case of SCA type Oauth or Redirect
+  paymentInitiationRequestDto:
+    type: object
+    required:
+    - debtorAccount
+    - instructedAmount
+    - creditorAccount
+    - creditorName
+    properties:
+      endToEndIdentification:
+        type: string
+        maxLength: 35
+        description: In the cross-border-credit-transfer type payment this attribute
+          does not apply
+        example: "3456345623457"
+      debtorAccount:
+        $ref: '#/definitions/accountReferenceDto'
+        description: Debtor's bank account
+      instructedAmount:
+        $ref: '#/definitions/amountDto'
+        description: Payment amount
+      creditorAccount:
+        $ref: '#/definitions/accountReferenceDto'
+        description: Creditor's bank account
+      creditorAgent:
+        type: string
+        minLength: 8
+        maxLength: 11
+        description: Identifier of the bank that maintains the creditor's account
+        example: "337562046"
+      creditorName:
+        type: string
+        maxLength: 70
+        description: Creditor's name
+        example: Pedro García Hidalgo
+      creditorAddress:
+        $ref: '#/definitions/addressDto'
+        description: Creditor address
+      remittanceInformationUnstructured:
+        type: string
+        maxLength: 140
+        description: Unstructured payment information
+      requestedExecutionDate:
+        type: string
+        format: date
+        description: If this field is not used, the payment will be immediate
+        example: "2017-07-21"
+    
+  fundsAvailable:
+    type: object
+    description: '''true'' if there are sufficient funds available, ''false'' if not'
+    properties:
+      available:
+        type: boolean
+        example: true
+        
+  addressDto:
+    type: object
+    required:
+    - countryCode
+    properties:
+      street:
+        type: string
+        maxLength: 70
+        example: Fuente de la mora
+      buildingNumber:
+        type: string
+        example: "2"
+      city:
+        type: string
+        example: Madrid
+      postalCode:
+        type: string
+        example: "28050"
+      countryCode:
+        type: string
+        pattern: ^[A-Z]{3}$
+        example: ESP

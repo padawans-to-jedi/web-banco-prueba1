@@ -246,7 +246,285 @@ paths:
           schema:
             $ref: '#/definitions/ErrorResponse'
  
+  /funds-confirmations:
+    post:
+      tags:
+      - funds
+      summary: Operation used to confirm funds in an account during a payment process
+      description: |
+        In this Sandbox version, you can use the following values to force your desired response back:
 
+        | Case | IBAN |
+        | ------- | -------- |
+        | 200 OK true   | ES1020480000213004029736  |
+        | 200 OK false   | ES1020480000213004029000   |
+        | Status code 400   | ES1020480000213004029400    |
+        | Status code 499   | ES1020480000213004029499    |
+        | Status code 500   | ES1020480000213004029500    |
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: X-Request-Id
+        in: header
+        type: string
+        format: uuid
+        required: true
+        description: ID of the request, unique to the call, determined by the initiating
+          part
+      - name: body
+        in: body
+        description: Account object that represent the caracteristic of a bank account
+        required: true
+        schema:
+          $ref: '#/definitions/body'
+      responses:
+        200:
+          description: 200 ok
+          headers:
+            X-Request-ID:
+              type: string
+              format: uuid
+          schema:
+            $ref: '#/definitions/FundsAvailableResponse'
+        400:
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: 403 Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        405:
+          description: 405 Method Not Allowed
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        499:
+          description: 499 Codigo Transformaciones Inexistente
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: 500 Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+
+  /payments/{payment-product}:
+    post:
+      tags:
+      - payments
+      summary: Operation to initiate a single payment, valid both for a payment at
+        the time and at a future date indicated
+      description: |
+        In this Sandbox version, you can use the following values to force your desired response back:
+
+        | Case | X-Request-Id |
+        | ------- | -------- |
+        | Status code 400   | 550e8400-e29b-41d4-a716-446655440400    |
+        | Status code 404   | 550e8400-e29b-41d4-a716-446655440404    |
+        | Status code 500   | 550e8400-e29b-41d4-a716-446655440500    |
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: payment-product
+        in: path
+        type: string
+        required: true
+        example: sepa-credit-transfers
+        description: The types of payment supported. ONLY SUPPORTS 'sepa-credit-transfers' VALUE
+      - name: X-Request-Id
+        in: header
+        type: string
+        format: uuid
+        required: true
+        description: ID of the request, unique to the call, determined by the initiating
+          party
+      - name: PSU-Id
+        in: header
+        type: string
+        description: ID of the PSU in the bank. It is not necessary in a previous
+          step authentication has been performed
+      - name: PSU-Id-Type
+        in: header
+        type: string
+        description: PSU ID type
+      - name: PSU-Corporate-Id
+        in: header
+        type: string
+        description: ID of the corporation in online channels
+      - name: PSU-Corporate-Id-Type
+        in: header
+        type: string
+        description: Type of the corporation ID
+      - name: PSU-IP-Address
+        in: header
+        type: string
+        description: The IP of the HTTP request between the PSU and the TPP. If it
+          is not available, the TPP IP is used.
+        required: true
+      - name: TPP-Redirect-URI
+        in: header
+        type: string
+        description: URI of the TPP where the flow of the transaction must be redirected
+          after a Redirect.
+      - name: TPP-Nok-Redirect-URI
+        in: header
+        type: string
+        description: If it is used, it must be redirected to this URI of the TPP in
+          case of obtaining a KO in the transaction
+      - name: post-req-body-payments
+        in: body
+        schema:
+          $ref: '#/definitions/paymentInitiationRequest'
+      responses:
+        201:
+          description: 201 Created
+          headers:
+            Location:
+              type: string
+              description: URI to the created resource
+            X-Request-Id:
+              type: string
+              format: uuid
+          schema:
+            $ref: '#/definitions/paymentInitiationResponse'
+        400:
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        401:
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: 403 Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        404:
+          description: 404 Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        405:
+          description: 405 Method Not Allowed
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        499:
+          description: 499 Codigo Transformaciones Inexistente
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: 500 Interñnal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+            
+  /payments/{payment-product}/{payment-id}:
+    get:
+      tags:
+      - get-paymentId-paymentProduct
+      summary: Operation to obtain the information of a payment
+      description: |
+        In this Sandbox version, you can use the following values to force your desired response back:
+
+        | Case | /payments/{payment-product/{payment-id}} |
+        | ------- | -------- |
+        | 200 OK   | /payments/sepa-credit-transfers/ULBK123    |
+        | Status code 400   | /payments/sepa-credit-transfers/ULBK1230    |
+        | Status code 500   | /payments/sepa-credit-transfers/ULBK1235    |
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: payment-product
+        in: path
+        type: string
+        required: true
+        example: sepa-credit-transfers
+        description: The types of payment supported. ONLY SUPPORTS 'sepa-credit-transfers' VALUE
+      - name: payment-id
+        in: path
+        type: string
+        required: true
+        description: Payment Id
+      - name: X-Request-Id
+        in: header
+        type: string
+        description: ID of the request, unique to the call, determined by the initiating
+          party
+      - name: PSU-Id
+        in: header
+        type: string
+        description: ID of the PSU in the bank. It is not necessary in a previous
+          step authentication has been performed
+      - name: PSU-Id-Type
+        in: header
+        type: string
+        description: PSU ID type, if there are several in the bank
+      - name: PSU-Corporate-Id
+        in: header
+        type: string
+        description: ID of the corporation in online channels
+      - name: PSU-Corporate-ID-Type
+        in: header
+        type: string
+        description: Type of the corporation ID, if there are several
+      - name: PSU-IP-Address
+        in: header
+        type: string
+        description: The IP of the HTTP request between the PSU and the TPP. If it
+          is not available, the TPP is used.
+        required: true
+      - name: TPP-Redirect-URI
+        in: header
+        type: string
+        description: URI of the TPP where the flow of the transaction must be redirected
+          after a Redirect.
+      - name: TPP-Nok-Redirect-URI
+        in: header
+        type: string
+        description: If it is used, it must be redirected to this URI of the TPP in
+          case of obtaining a KO in the transaction
+      responses:
+        200:
+          description: 200 ok
+          headers:
+            X-Request-Id:
+              type: string
+              format: uuid
+              description: Id of the request, unique to the call, determined by the
+                initiating part
+            Content-Type:
+              type: string
+              description: application/json
+          schema:
+            $ref: '#/definitions/paymentResponse'
+        400:
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        401:
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: 403 Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        405:
+          description: 405 Method Not Allowed
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        499:
+          description: 499 Codigo Transformaciones Inexistente
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: 500 Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        
 definitions:
 
   AccountsResponse:
@@ -294,6 +572,14 @@ definitions:
               $ref: '#/definitions/transactionDto'
           next_cursor:
             type: string
+            
+  FundsAvailableResponse:
+    type: object
+    description: '''true'' if there are sufficient funds available, ''false'' if not'
+    properties:
+      available:
+        type: boolean
+        example: true
             
   ErrorResponse:
     type: object
@@ -449,6 +735,237 @@ definitions:
       refresh_token:
         type: string
   
+  body:
+    type: object
+    required:
+    - account
+    - instructedAmount
+    properties:
+      cardNumber:
+        type: string
+        description: Card number, must be sent if is available
+        example: 1196931787259904
+      account:
+        $ref: '#/definitions/acountReference'
+      payee:
+        type: string
+        maxLength: 70
+        description: Commerce that accept the card
+        example: John Marshall
+      instructedAmount:
+        $ref: '#/definitions/amount'
+  acountReference:
+    type: object
+    properties:
+      iban:
+        type: string
+        pattern: ^[A-Z]{2}[0-9]{2}[0-9]{20}$
+        description: International Bank Account Number
+        example: ES1020480000213004029736
+      currency:
+        type: string
+        pattern: ^[A-Z]{3}$
+        description: Badge in ISO 4217 Alpha 3
+        example: EUR
+  amount:
+    type: object
+    required:
+    - currency
+    - amount
+    properties:
+      currency:
+        type: string
+        pattern: ^[A-Z]{3}$
+        description: Badge in ISO 4217 Alpha 3
+        example: EUR
+      amount:
+        type: number
+        description: Quantity with fractional digits. Negative quantities begin with
+          the minus sign '-'. The decimal point separator is a point '.'
+        example: 1000
+          
+  paymentInitiationRequest:
+    type: object
+    required:
+    - debtorAccount
+    - instructedAmount
+    - creditorAccount
+    - creditorName
+    properties:
+      endToEndIdentification:
+        type: string
+        maxLength: 35
+        description: In the cross-border-credit-transfer type payment this attribute
+          does not apply
+        example: "3456345623457"
+      debtorAccount:
+        $ref: '#/definitions/accountReferenceDto'
+        description: Debtor's bank account
+      instructedAmount:
+        $ref: '#/definitions/amountDto'
+        description: Payment amount
+      creditorAccount:
+        $ref: '#/definitions/accountReferenceDto'
+        description: Creditor's bank account
+      creditorAgent:
+        type: string
+        minLength: 8
+        maxLength: 11
+        description: Identifier of the bank that maintains the creditor's account
+        example: "337562046"
+      creditorName:
+        type: string
+        maxLength: 70
+        description: Creditor's name
+        example: Pedro García Hidalgo
+      creditorAddress:
+        $ref: '#/definitions/addressDto'
+        description: Creditor address
+      remittanceInformationUnstructured:
+        type: string
+        maxLength: 140
+        description: Unstructured payment information
+      requestedExecutionDate:
+        type: string
+        format: date
+        description: If this field is not used, the payment will be immediate
+        example: "2017-07-21"
+        
+  paymentInitiationResponse:
+    type: object
+    required:
+    - transactionStatus
+    - paymentId
+    properties:
+      transactionStatus:
+        type: string
+        enum:
+        - ACCP
+        - ACSC
+        - ACSP
+        - ACTC
+        - ACWC
+        - ACWP
+        - RCVD
+        - PDNG
+        - RJCT
+        description: Transaction Status
+        example: ACCP
+      paymentId:
+        type: string
+        description: Id of the created payment
+        example: IDPAYMENT
+      transactionFees:
+        $ref: '#/definitions/amountDto'
+        description: Costs derived from the transaction
+      transactionFeeIndicator:
+        type: boolean
+        description: If it is 'true', the transaction carries some cost, indicated
+          above. If it is 'false', the transaction does not incur any additional cost
+          to the PSU
+        example: true
+      psuMessage:
+        type: string
+        description: Text to be shown to the PSU
+      scaOauth:
+        type: string
+        description: Several links recognizable by the TPP, for redirection in the
+          case of SCA type Oauth or Redirect
+          
+  addressDto:
+    type: object
+    required:
+    - countryCode
+    properties:
+      street:
+        type: string
+        maxLength: 70
+        example: Fuente de la mora
+      buildingNumber:
+        type: string
+        example: "2"
+      city:
+        type: string
+        example: Madrid
+      postalCode:
+        type: string
+        example: "28050"
+      countryCode:
+        type: string
+        pattern: ^[A-Z]{3}$
+        example: ESP
+        
+  paymentResponse:
+    type: object
+    required:
+    - transactionStatus
+    - paymentId
+    - debtorAccount
+    - instructedAmount
+    - creditorAccount
+    - creditorName
+    properties:
+      transactionStatus:
+        type: string
+        enum:
+        - ACCP
+        - ACSC
+        - ACSP
+        - ACTC
+        - ACWC
+        - ACWP
+        - RCVD
+        - PDNG
+        - RJCT
+        description: Transaction Status
+        example: ACCP
+      paymentId:
+        type: string
+        description: Payment Id
+      transactionFees:
+        $ref: '#/definitions/amountDto'
+        description: Costs derived from the transaction
+      transactionFeeIndicator:
+        type: boolean
+        description: If it is 'true', the transaction carries some cost, indicated
+          above. If it is 'false', the transaction does not incur any additional cost
+          to the PSU
+      endToEndIdentification:
+        type: string
+        maxLength: 35
+        description: In the cross-border-credit-transfer type payment this attribute
+          does not apply
+      debtorAccount:
+        $ref: '#/definitions/accountReferenceDto'
+        description: Debtor's bank account
+      instructedAmount:
+        $ref: '#/definitions/amountDto'
+        description: Payment amount
+      creditorAccount:
+        $ref: '#/definitions/accountReferenceDto'
+        description: Creditor's bank account
+      creditorAgent:
+        type: string
+        minLength: 8
+        maxLength: 11
+        description: Identifier of the bank that maintains the creditor's account
+      creditorName:
+        type: string
+        maxLength: 70
+        description: Creditor name
+      creditorAddress:
+        $ref: '#/definitions/addressDto'
+        description: Address of the creditor
+      remittanceInformationUnstructured:
+        type: string
+        maxLength: 140
+        description: Unstructured payment information
+      requestedExecutionDate:
+        type: string
+        format: date
+        description: Date on which to make the payment. If this field is not used,
+          the payment will be immediate
+        example: "2017-07-21"
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
 basePath: /pedrodlf/LiberBank-ApiGateway/1.0

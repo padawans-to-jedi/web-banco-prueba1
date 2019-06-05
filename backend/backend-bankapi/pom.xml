@@ -113,17 +113,30 @@
                 <version>2.2.3</version>
                 <executions>
                     <execution>
-                        <id>generate-spring-mvc</id>
+                        <id>generador_bankapi</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-
                             <inputSpec>${project.build.sourceDirectory}/../resources/generador_bankapi_${api.version}.yaml</inputSpec>
-<!--                             <inputSpec>${project.build.sourceDirectory}/../resources/generador_liberbank_${api.version}.yaml</inputSpec> -->
                             <language>spring</language>
                             <modelPackage>com.padawans.hackaton.bankapi.generated.model</modelPackage>
                             <apiPackage>com.padawans.hackaton.bankapi.generated.api</apiPackage>
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <dateLibrary>java.util.Date</dateLibrary>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generador_liberbank</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.build.sourceDirectory}/../resources/generador_liberbank_${api.version}.yaml</inputSpec>
+                            <language>spring</language>
+                            <modelPackage>com.padawans.hackaton.bankapi.generated.external.dto</modelPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
                                 <dateLibrary>java.util.Date</dateLibrary>
