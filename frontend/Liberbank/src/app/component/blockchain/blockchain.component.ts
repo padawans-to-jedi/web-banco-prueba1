@@ -13,6 +13,8 @@ export class BlockchainComponent implements OnInit {
 
   public idTransaccion: Hash;
   public transactionResponse: Transactions;
+  public status: string;
+  public showData: boolean;
 
   constructor(
     private _userRegisterService: UserRegistreService,
@@ -20,6 +22,7 @@ export class BlockchainComponent implements OnInit {
     private _router: Router
   ) {
     this.idTransaccion = new Hash("")
+    this.showData = true;
   }
 
   ngOnInit() {
@@ -30,13 +33,17 @@ export class BlockchainComponent implements OnInit {
 
     this._userRegisterService.consultHash(this.idTransaccion).subscribe(
       response => {
-        console.log(response)
         this.transactionResponse = response;
         console.log(this.transactionResponse)
-        console.log(this.transactionResponse.debitor)
-        console.log(this.transactionResponse.creditor)
-        console.log(this.transactionResponse.ammount)
-        this._router.navigate(['/login']);
+
+        if(this.transactionResponse) {
+          console.log("Tengo los datos de la transacción")
+          this.showData = false;
+        } else {
+          this.showData = true;
+        }
+
+        // this._router.navigate(['/login']);
 
       }, error => {
         console.error(error)

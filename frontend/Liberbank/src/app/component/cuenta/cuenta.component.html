@@ -1,16 +1,15 @@
 
 
 <div class="container-fluid">
-
-
     <span>Cuentas:</span>
-    <!-- *ngFor="let item of lista" -->
+    <!-- *ngFor="let cuenta of cuentas" -->
     <ul class="list-group list-group-flush">
-      <!-- {{item.product}} -->
-        <li class="list-group-item"><a href="#">ES23423543535354</a></li>
+      <!-- {{cuenta.data.iban}} -->
+        <li class="list-group-item"><a [routerLink]="['/cuenta-desglose']">ES23423543535354</a></li>
+              <!-- {{cuenta.data.currency}} -->
         <li class="list-group-item">EUR</li>
+              <!-- {{cuenta.data.product}} -->
         <li class="list-group-item">Producto</li>
         <br><hr/>
       </ul>
-
 </div>

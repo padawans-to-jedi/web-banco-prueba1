@@ -1,0 +1,50 @@
+
+
+<div class="container-fluid">
+
+
+    <span>Cuentas:</span>
+ <!-- *ngFor="let cuenta of cuentas" -->
+      <ul class="list-group list-group-flush">
+ <!-- {{cuenta.data.iban}} -->
+        <li class="list-group-item">ES23423543535354</li>
+         <!-- {{cuenta.data.currency}} -->
+        <li class="list-group-item">EUR</li>
+         <!-- {{cuenta.data.product}} -->
+        <li class="list-group-item">Producto</li>
+        <br><hr/>
+
+      </ul>
+
+      <!-- TABLA DESGLOSE MOVIMIENTOS -->
+
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Fecha operación</th>
+              <th scope="col">Concepto</th>
+              <th scope="col">Importe</th>
+              <th scope="col">Fecha valor</th>
+              <th scope="col">Saldo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- *ngFor="let desglose of desglosesCuenta" -->
+            <tr>
+              <!-- {{desglose.bookingDate}} -->
+              <td>01-06-2019</td>
+              <!-- {{desglose.entryReference}} -->
+              <td>Alquiler Junio</td>
+              <!-- {{desglose.amount.amount}} {{desglose.amount.currency}}-->
+              <th scope="row">1.200 €</th>
+              <!-- {{desglose.balances.closingBooked.lastChangeDateTime}} -->
+              <td>06-06-2019</td>
+              <!-- {{desglose.balances.closingBooked.amount}} {{desglose.balances.closingBooked.currency}} -->
+              <td>546,50 €</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button class="btn btn-success" (click)="volver()">Volver</button>
+
+</div>

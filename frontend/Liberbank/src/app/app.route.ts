@@ -11,6 +11,8 @@ import { DatosPersonalesComponent } from './component/datos-personales/datos-per
 import { BlockchainComponent } from './component/blockchain/blockchain.component';
 import { TransaccionesComponent } from './component/transacciones/transacciones.component';
 import { CuentaComponent } from './component/cuenta/cuenta.component';
+import { DesgloseCuentaComponent } from './component/desglose-cuenta/desglose-cuenta.component';
+
 
 // Array de routas
 
@@ -19,7 +21,8 @@ import { CuentaComponent } from './component/cuenta/cuenta.component';
      { path: 'blockchain', component: BlockchainComponent },
      { path: 'transacciones', component: TransaccionesComponent },
      { path: 'datos-personales', component: DatosPersonalesComponent },
-     { path: 'cuenta', component: CuentaComponent }
+     { path: 'cuenta', component: CuentaComponent },
+     { path: 'cuenta-desglose', component: DesgloseCuentaComponent }
 
  ]
 

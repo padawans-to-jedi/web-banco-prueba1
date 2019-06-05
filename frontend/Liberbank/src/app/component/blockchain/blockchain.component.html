@@ -1,14 +1,26 @@
+
+
 <div class="contenedor">
     <img src="../../../assets/img/blockchain.png" />
     <div class="contenedor-pequeno">
-        <div class="span">
+        <div class="span" *ngIf="showData">
             <!-- <span>Blockchain</span> -->
             <img src="../../../assets/img/ethereum.svg" class="ethereum">
+            <form #registerForm="ngForm" (ngSubmit)="consultarHash()" >
+                <input type="text" name="hash" #hash="ngModel" [(ngModel)]="idTransaccion.hash" placeholder="Introduce tu identificador de transacción">
+                <button type="submit" class="btn btn-info">Consultar</button>
+            </form>
         </div>
 
-        <form #registerForm="ngForm" (ngSubmit)="consultarHash()" >
-            <input type="text" name="hash" #hash="ngModel" [(ngModel)]="idTransaccion.hash" placeholder="Introduce tu identificador de transacción">
-            <button type="submit" class="btn btn-info">Consultar</button>
-        </form>
+        <div class="container-fluid" *ngIf="!showData">
+            <p>Datos de la transacción</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><span>Emisor:</span> {{transactionResponse.debitor.name}}  {{transactionResponse.debitor.surname}}</li>
+                <li class="list-group-item"><span>Receptor:</span>{{transactionResponse.creditor.name}} {{transactionResponse.creditor.surname}}</li>
+                <li class="list-group-item"><span>Importe:</span>{{transactionResponse.ammount}} €</li>
+              </ul>
+        </div>
+
+
     </div>
 </div>

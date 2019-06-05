@@ -2,7 +2,7 @@
     <div class="container-contact2">
         <div class="wrap-contact2">
             <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
-                <span>Datos modificados correctamente. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>
+                <span>Datos modificados correctamente. <a [routerLink]="['/login']" class="button">Aceptar</a></span>
             </div>
             <div class="alert alert-danger" *ngIf="status == 'error'">
                 <span>Datos no modificados, vuelva a intentarlo. <button type="button" class="btn" data-dismiss="modal">Aceptar</button></span>

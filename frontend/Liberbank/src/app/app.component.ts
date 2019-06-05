@@ -41,7 +41,7 @@ export class AppComponent implements OnInit{
 
   resgistrar(form) {
     console.log(this.user)
-   
+
     this._userRegisterService.registrado(this.user).subscribe(
       response => {
         if(response) {
@@ -59,9 +59,9 @@ export class AppComponent implements OnInit{
       }
     );
   }
- 
+
 }
- 
+
 
 
 

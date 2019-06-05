@@ -11,6 +11,7 @@ import { DatosPersonalesComponent } from './component/datos-personales/datos-per
 import { BlockchainComponent } from './component/blockchain/blockchain.component';
 import { TransaccionesComponent } from './component/transacciones/transacciones.component';
 import { CuentaComponent } from './component/cuenta/cuenta.component';
+import { DesgloseCuentaComponent } from './component/desglose-cuenta/desglose-cuenta.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CuentaComponent } from './component/cuenta/cuenta.component';
     DatosPersonalesComponent,
     BlockchainComponent,
     TransaccionesComponent,
-    CuentaComponent
+    CuentaComponent,
+    DesgloseCuentaComponent
   ],
   imports: [
     BrowserModule,

@@ -23,8 +23,8 @@
                 </li>
             </ul>
 
-            <ul class="nav navbar-nav float-right" *ngIf="identity">
-                <li class="dropdown">
+            <ul class="nav navbar-nav ml-auto" *ngIf="identity">
+                <li class="dropdown pull-right">
                     <a class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" href="#">
                         Bienvenido {{identity.name}} {{identity.surname}}
                         <span class="caret"></span>
@@ -141,10 +141,10 @@
                         <label for="password" class="col-sm-2 col-form-label col-form-label-sm">Contraseña</label>
                         <input type="password" class="form-control form-control-sm" name="password" #password="ngModel" [(ngModel)]="user.password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" required>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="passwordRepeat" class="col-form-label col-form-label-sm" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" required>Repetir contraseña</label>
                         <input type="password" name="passwordRepeat" class="form-control">
-                    </div>
+                    </div> -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <input type="submit" class="btn btn-success" value="Registrar">

@@ -58,3 +58,33 @@ button {
     color: whitesmoke;
     font-family: 'Open';
 } */
+
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 70px;
+}
+
+.list-group {
+  width: 75%;
+  padding-left: 180px;
+}
+
+.list-group-item {
+  text-align: center;
+  background: #f8f9fa00;
+  font-size: 25px;
+  font-family: 'Open';
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: 'Open';
+  font-size: 28px;
+  margin-bottom: 45px;
+  text-align: center;
+}

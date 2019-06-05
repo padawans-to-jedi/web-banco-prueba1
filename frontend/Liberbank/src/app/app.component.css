@@ -31,6 +31,10 @@ body {
   font-family: 'Open';
 }
 
+.dropdown-menu li a:hover {
+  text-decoration: none !important;
+}
+
 .boton-acceso {
     color: #00A38D;
     text-decoration: none;
@@ -72,6 +76,7 @@ body {
     font-weight: bold;
     margin-left: 14%;
     font-family: 'Open';
+    cursor: pointer;
 }
 
 .btn-outline-warning {

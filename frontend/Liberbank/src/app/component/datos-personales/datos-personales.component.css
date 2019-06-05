@@ -12,7 +12,7 @@
 }
 
 .container-contact2 {
-      width: 100%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     padding: 108px;
@@ -23,8 +23,8 @@
 }
 
 .wrap-contact2 {
-    width: 550px;
-    background: #fff;
+    width: 432px;
+    background: #7ca0c321;
     border-radius: 10px;
     overflow: hidden;
     padding: 15px 55px 15px 55px;
@@ -41,9 +41,10 @@
 .wrap-input2 {
     width: 100%;
     position: relative;
-    border-bottom: 2px solid #adadad;
+    border-bottom: 2px solid #7ca0c321;
     margin-bottom: 25px;
     padding: 0px 15px 0px 15px;
+    background: transparent;
 }
 
 .validate-input {
@@ -52,13 +53,15 @@
 
 input.input2 {
     height: 20px;
+    background: transparent;
+    color: #695a5a;
+    font-size: 18px;
 }
 
 .input2 {
     display: block;
     width: 100%;
     font-size: 15px;
-    color: #555555;
     line-height: 1.2;
 }
 
@@ -83,4 +86,5 @@ input {
 
 button {
     font-size: 17px;
+    margin-top: -5px;
 }
