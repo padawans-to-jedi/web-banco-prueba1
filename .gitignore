@@ -68,3 +68,4 @@ blockchain/Node1/geth/nodes/LOG
 blockchain/Node1/geth/nodes/MANIFEST-000007
 hackaton-backend/backend-bankapi/.project
 hackaton-backend/backend-bankapi/bin/.project
+backend/backend-bankapi/bin/.project
