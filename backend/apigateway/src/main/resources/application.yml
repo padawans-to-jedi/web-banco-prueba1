@@ -2,7 +2,7 @@
 server:
   port: 8080
 #Constanst
-database: liberbank-database
+database: we-pay-all-db
 host: localhost:3306  
 
 #JPA
@@ -12,7 +12,8 @@ spring:
     show-sql: false
     properties: 
       hibernate: 
-        format_sql : true 
+        format_sql : true
+        dialect: org.hibernate.dialect.MySQL5Dialect 
   datasource: 
     url: jdbc:mysql://${host}/${database}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT
     username: root
